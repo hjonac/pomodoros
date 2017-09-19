@@ -1,5 +1,25 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto:300');
+@import '~antd/dist/antd.css';
+
+/*
+font-family: 'Open Sans', sans-serif;*/
+
+.ant-layout {
+    background-color: #ffffff !important;
 }
+
+.app {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.app #titulo {
+    padding: 40px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+}
+
