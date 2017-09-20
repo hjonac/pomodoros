@@ -19,10 +19,11 @@ class TituloForm extends Component {
         if (this.props.libro_activo.id !== '')
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
 
+        console.log(this.props);
         return (
             <Form onSubmit={this.onSubmit} layout="vertical">
                 <FormItem label="Nombre">
-                    {getFieldDecorator('tarea', {
+                    {getFieldDecorator('libro', {
                         rules: [{ required: true, message: 'Este campo es requerido' }],
                         initialValue: this.props.libro_activo.nombre
                     })(
@@ -38,11 +39,25 @@ class TituloForm extends Component {
     }
 
     onSubmit(e) {
-        this.props.onSubmit(e);
+        e.preventDefault();
+
+        let titulo = {
+            id: this.libro_id.value,
+            nombre: this.libro_nombre.props.value,
+        };
+
+        this.props.form.validateFields((err, values) => {
+            if (!err)
+            {
+                this.props.onSubmit(titulo.id, titulo.nombre);
+
+                this.onReset(e);
+            }
+        });
     }
 
     onReset(e) {
-        this.props.onReset(e);
+        this.props.onReset();
     }
 }
 

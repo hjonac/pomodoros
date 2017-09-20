@@ -22,7 +22,6 @@ function libros(state = [], action) {
         break;
         default:
             return state;
-        break;
     }
 }
 
@@ -30,11 +29,10 @@ function libro_activo (state = {id: '', nombre: ''}, action) {
     switch (action.type)
     {
         case ACTIVAR_LIBRO:
-            return {...state, id: action.id, nombre: action.nombre};
+            return {id: action.id, nombre: action.nombre};
         break;
         default:
             return state;
-        break;
     }
 }
 

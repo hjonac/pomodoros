@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Row, Col } from 'antd';
-import Titulo from './titulo/titulo';
-import TituloForm from './titulo_formulario/titulo_formulario';
+import { Row, Col } from 'antd';
+import ContenedorTitulo from './titulo/titulo_contenedor';
+import ContenedorTituloForm from './titulo_formulario/titulo_formulario_contenedor';
 
 class Libros extends Component {
 
@@ -10,10 +10,10 @@ class Libros extends Component {
         return (
             <Row>
                 <Col span={24}>
-                    <Titulo />
+                    <ContenedorTitulo />
                 </Col>
                 <Col span={24}>
-                    <TituloForm />
+                    <ContenedorTituloForm />
                 </Col>
             </Row>
         )

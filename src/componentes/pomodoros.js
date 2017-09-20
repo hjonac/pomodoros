@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Libros from './libros';
-import { Layout, Row, Col } from 'antd';
+import { Layout } from 'antd';
 
 const { Content } = Layout;
 
