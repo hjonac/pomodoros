@@ -15,6 +15,12 @@ const mapStateToProps = (state) => {
     }
 };
 
+const mapStateToFields = (state) => {
+    return {
+        nombre: state.libro_activo.nombre
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id, nombre) => { id === '' ? dispatch(agregar_libro(nombre)) : dispatch(editar_libro(id, nombre)) },
@@ -22,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const AntTituloForm = Form.create({mapPropsToFields: mapStateToProps})(TituloForm);
+const AntTituloForm = Form.create({mapPropsToFields: mapStateToFields})(TituloForm);
 
 const ContenedorTituloForm = connect(
     mapStateToProps,
