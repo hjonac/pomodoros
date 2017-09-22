@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 
-class TituloForm extends Component {
+class LibroForm extends Component {
 
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ class TituloForm extends Component {
     }
 }
 
-TituloForm.defaultProps = {
+LibroForm.defaultProps = {
     libro_activo: {
         id: '',
         nombre: ''
@@ -69,4 +69,4 @@ TituloForm.defaultProps = {
     onReset: () => {}
 };
 
-export default TituloForm;
+export default LibroForm;

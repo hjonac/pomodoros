@@ -29,7 +29,7 @@ function libro_activo (state = {id: '', nombre: ''}, action) {
     switch (action.type)
     {
         case ACTIVAR_LIBRO:
-            return {id: action.id, nombre: action.nombre};
+            return { ...state, id: action.libro.id, nombre: action.libro.nombre};
         break;
         default:
             return state;

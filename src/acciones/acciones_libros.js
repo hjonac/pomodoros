@@ -16,8 +16,8 @@ export function eliminar_libro(id) {
     return {type: ELIMINAR_LIBRO, id: id }
 }
 
-export function activar_libro(id, nombre) {
-    return {type: ACTIVAR_LIBRO, id: id, nombre: nombre}
+export function activar_libro(libro) {
+    return {type: ACTIVAR_LIBRO, libro: libro}
 }
 
 export function repetir_libro(id) {

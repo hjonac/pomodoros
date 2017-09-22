@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^2.12.2",
+    "classnames": "^2.2.5",
     "history": "^4.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

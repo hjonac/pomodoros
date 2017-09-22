@@ -1,4 +1,4 @@
-import TituloForm from './titulo_formulario';
+import LibroForm from './libro_formulario';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 
@@ -17,22 +17,22 @@ const mapStateToProps = (state) => {
 
 const mapStateToFields = (state) => {
     return {
-        nombre: state.libro_activo.nombre
+        nombre: state.libro_activo
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id, nombre) => { id === '' ? dispatch(agregar_libro(nombre)) : dispatch(editar_libro(id, nombre)) },
-        onReset: () => { dispatch(activar_libro(libro_por_defecto.id, libro_por_defecto.nombre)) }
+        onReset: () => { dispatch(activar_libro(libro_por_defecto)) }
     }
 };
 
-const AntTituloForm = Form.create({mapPropsToFields: mapStateToFields})(TituloForm);
+const AntLibroForm = Form.create({mapPropsToFields: mapStateToFields})(LibroForm);
 
-const ContenedorTituloForm = connect(
+const ContenedorLibroForm = connect(
     mapStateToProps,
     mapDispatchToProps
-)(AntTituloForm);
+)(AntLibroForm);
 
-export default ContenedorTituloForm;
+export default ContenedorLibroForm;
