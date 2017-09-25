@@ -31,7 +31,7 @@ class LibroForm extends Component {
                 </FormItem>
                 <FormItem>
                     <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_activo.id}/>
-                    <Button type="primary" htmlType="submit" icon="save">Guardar</Button> &nbsp; { boton_cancelar }
+                    <Button type="primary" htmlType="submit" icon="save">{this.props.libro_activo.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar }
                 </FormItem>
             </Form>
         );

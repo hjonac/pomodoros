@@ -16,13 +16,8 @@
     margin: 0 auto;
 }
 
-.app #titulo {
-    padding: 40px 0;
-    text-align: center;
-    text-transform: uppercase;
-    color: #333;
-    font-family: 'Roboto', sans-serif;
-    font-size: 40px;
+.pull_left {
+    float: left;
 }
 
 .hide {
