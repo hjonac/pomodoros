@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Libros from './libros';
+import { Route } from 'react-router';
 import { Layout } from 'antd';
+import Libros from './libros';
+import Tareas from './tareas';
 
 const { Content } = Layout;
 
@@ -11,7 +13,8 @@ class Pomodoros extends Component {
             <div className="app">
                 <Layout className="layout">
                     <Content>
-                        <Libros />
+                        <Route exact path="/" component={Libros} />
+                        <Route exact path="/tareas" component={Tareas} />
                     </Content>
                 </Layout>
             </div>
