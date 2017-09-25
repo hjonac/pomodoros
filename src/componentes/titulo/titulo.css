@@ -1,0 +1,17 @@
+#titulo {
+    position: relative;
+    padding: 40px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+}
+
+#titulo button {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    top: 50%;
+    margin-top: -10px;
+}
