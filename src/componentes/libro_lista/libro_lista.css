@@ -1,5 +1,6 @@
 ul.lista-libros {
     list-style: circle !important;
+    border-left: 1px solid #eeeeee;
 }
 
 li {

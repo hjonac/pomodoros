@@ -1,6 +1,6 @@
 import LibroList from './libro_lista';
 import { connect } from 'react-redux';
-import { activar_libro } from '../../acciones/acciones_libros';
+import {activar_libro, eliminar_libro} from '../../acciones/acciones_libros';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: (libro) => { dispatch(activar_libro(libro)) }
+        onClick: (libro) => { dispatch(activar_libro(libro)) },
+        onDelete: (id) => { dispatch(eliminar_libro(id)) }
     }
 };
 
