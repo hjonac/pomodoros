@@ -1,4 +1,6 @@
-import {AGREGAR_LIBRO, EDITAR_LIBRO, ELIMINAR_LIBRO, ACTIVAR_LIBRO, REPETIR_LIBRO} from '../acciones/acciones_libros';
+import {
+    AGREGAR_LIBRO, EDITAR_LIBRO, ELIMINAR_LIBRO, ESTABLECER_LIBRO_EN_EDICION, SELECCIONAR_LIBRO, REPETIR_LIBRO
+} from '../acciones/acciones_libros';
 import uuid from 'uuid';
 
 function libros(state = [], action) {
@@ -25,10 +27,10 @@ function libros(state = [], action) {
     }
 }
 
-function libro_activo (state = {id: '', nombre: ''}, action) {
+function libro_en_edicion (state = {id: '', nombre: ''}, action) {
     switch (action.type)
     {
-        case ACTIVAR_LIBRO:
+        case ESTABLECER_LIBRO_EN_EDICION:
             return { ...state, id: action.libro.id, nombre: action.libro.nombre};
         break;
         default:
@@ -36,9 +38,21 @@ function libro_activo (state = {id: '', nombre: ''}, action) {
     }
 }
 
+function libro_seleccionado (state = {id: '', nombre: ''}, action) {
+    switch (action.type)
+    {
+        case SELECCIONAR_LIBRO:
+            return { ...state, id: action.libro.id, nombre: action.libro.nombre};
+            break;
+        default:
+            return state;
+    }
+}
+
 const reductores_libros = {
     libros,
-    libro_activo
+    libro_en_edicion,
+    libro_seleccionado
 };
 
 export default reductores_libros;

@@ -1,17 +1,34 @@
 import LibroList from './libro_lista';
+import { routerActions } from 'react-router-redux';
 import { connect } from 'react-redux';
-import {activar_libro, eliminar_libro} from '../../acciones/acciones_libros';
+import { establecer_libro_en_edicion, eliminar_libro, seleccionar_libro } from '../../acciones/acciones_libros';
+
+function onEdit(libro) {
+    return (dispatch) => {
+        dispatch(seleccionar_libro(libro));
+        dispatch(establecer_libro_en_edicion(libro));
+    }
+}
+
+function onSelect(libro) {
+    return (dispatch) => {
+        dispatch(seleccionar_libro(libro));
+        dispatch(routerActions.push('/tareas'));
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
         libros: state.libros,
-        libro_activo: state.libro_activo
+        libro_en_edicion: state.libro_en_edicion,
+        libro_seleccionado: state.libro_seleccionado
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: (libro) => { dispatch(activar_libro(libro)) },
+        onEdit: (libro) => { dispatch(onEdit(libro)) },
+        onSelect: (libro) => { dispatch(onSelect(libro)) },
         onDelete: (id) => { dispatch(eliminar_libro(id)) }
     }
 };

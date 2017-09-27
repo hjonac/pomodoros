@@ -4,6 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
 import createHistory  from 'history/createBrowserHistory';
 import storage from 'redux-persist/es/storage';
 import reductor_libros from './reductores/reductor_libros';
@@ -17,16 +18,18 @@ const config = {
 };
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
+const middleware = applyMiddleware(routerMiddleware(history), thunk);
 
 const reducer = persistReducer(config, combineReducers({
     ...reductor_libros,
     router: routerReducer
 }));
 
+console.log(reducer);
+
 let store = createStore(
     reducer,
-    applyMiddleware(middleware)
+    middleware
 );
 
 persistStore(store);

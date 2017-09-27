@@ -3,8 +3,6 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import './titulo.css';
 
-const ButtonGroup = Button.Group;
-
 class Titulo extends Component {
 
     render() {
@@ -12,7 +10,7 @@ class Titulo extends Component {
         return (
 
             <h4 id="titulo">
-                { this.props.libro_activo.nombre === '' ? 'Pomodoros' : this.props.libro_activo.nombre }
+                { this.props.libro_seleccionado.nombre === '' ? 'Pomodoros' : this.props.libro_seleccionado.nombre }
                 { back_button }
             </h4>
         );
@@ -20,7 +18,7 @@ class Titulo extends Component {
 }
 
 Titulo.defaultProps = {
-    libro_activo: {
+    libro_seleccionado: {
         id: '',
         nombre: ''
     },

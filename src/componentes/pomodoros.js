@@ -14,7 +14,7 @@ class Pomodoros extends Component {
                 <Layout className="layout">
                     <Content>
                         <Route exact path="/" component={Libros} />
-                        <Route exact path="/tareas" component={Tareas} />
+                        <Route path="/tareas" component={Tareas} />
                     </Content>
                 </Layout>
             </div>

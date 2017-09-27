@@ -4,22 +4,40 @@ ul.lista-libros {
 }
 
 li {
+    position: relative;
     display: block;
     padding: 10px !important;
     font-size: 14px;
     cursor: pointer;
 }
 
-li:hover, li.activo {
+li:hover {
     background-color: aliceblue;
+}
+
+li.activo {
+    background-color: #108ee9;
+    color: #ffffff;
     font-weight: bold;
 }
 
 .opciones {
-    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100%;
+    display: none;
     padding-top: 10px;
+    background: rgba(250, 250, 250, .03);
+}
+
+li.activo .opciones,
+li:hover .opciones {
+    display: block;
 }
 
 .opciones button {
-    margin-right: 10px;
+    margin-left: 10px;
 }

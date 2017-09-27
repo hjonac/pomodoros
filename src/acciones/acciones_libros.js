@@ -1,7 +1,8 @@
 export const AGREGAR_LIBRO = "AGREGAR_LIBRO";
 export const EDITAR_LIBRO = "EDITAR_LIBRO";
 export const ELIMINAR_LIBRO = "ELIMINAR_LIBRO";
-export const ACTIVAR_LIBRO = "ACTIVAR_LIBRO";
+export const ESTABLECER_LIBRO_EN_EDICION = "ESTABLECER_LIBRO_EN_EDICION";
+export const SELECCIONAR_LIBRO = "SELECCIONAR_LIBRO";
 export const REPETIR_LIBRO = "REPETIR_LIBRO";
 
 export function agregar_libro(nombre) {
@@ -16,8 +17,12 @@ export function eliminar_libro(id) {
     return {type: ELIMINAR_LIBRO, id: id }
 }
 
-export function activar_libro(libro) {
-    return {type: ACTIVAR_LIBRO, libro: libro}
+export function establecer_libro_en_edicion(libro) {
+    return {type: ESTABLECER_LIBRO_EN_EDICION, libro: libro}
+}
+
+export function seleccionar_libro(libro) {
+    return {type: SELECCIONAR_LIBRO, libro: libro}
 }
 
 export function repetir_libro(id) {

@@ -16,7 +16,7 @@ class LibroForm extends Component {
         const { getFieldDecorator } = this.props.form;
         let boton_cancelar = null;
 
-        if (this.props.libro_activo.id !== '')
+        if (this.props.libro_en_edicion.id !== '')
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
 
         return (
@@ -24,14 +24,14 @@ class LibroForm extends Component {
                 <FormItem label="Nombre">
                     {getFieldDecorator('nombre', {
                         rules: [{ required: true, message: 'Este campo es requerido' }],
-                        initialValue: this.props.libro_activo.nombre || ''
+                        initialValue: this.props.libro_en_edicion.nombre || ''
                     })(
                         <Input ref={(nombre) => { this.libro_nombre = nombre }}/>
                     )}
                 </FormItem>
                 <FormItem>
-                    <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_activo.id}/>
-                    <Button type="primary" htmlType="submit" icon="save">{this.props.libro_activo.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar }
+                    <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id}/>
+                    <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar }
                 </FormItem>
             </Form>
         );
@@ -61,7 +61,7 @@ class LibroForm extends Component {
 }
 
 LibroForm.defaultProps = {
-    libro_activo: {
+    libro_en_edicion: {
         id: '',
         nombre: ''
     },
