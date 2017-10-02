@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 class LibroItem extends Component {
