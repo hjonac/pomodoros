@@ -10,7 +10,7 @@ function tareas(state={}, action) {
                     id: uuid.v4(),
                     descripcion: action.descripcion,
                     tiempo: action.tiempo,
-                    tiempo_transcurrido: 0
+                    tiempo_transcurrido: ''
                 }]
             };
         case EDITAR_TAREA:
