@@ -13,11 +13,10 @@ class LibroItem extends Component {
     render() {
         const libro = this.props.libro;
         return (
-            <li className={ classNames({activo: this.props.seleccionado}) }>{ libro.nombre }
+            <li onClick={ this.seleccionarLibro } className={ classNames({activo: this.props.seleccionado}) }>{ libro.nombre }
                 <div className={ classNames('opciones') }>
-                    <Button shape="circle" icon="enter" size="small" onClick={ this.seleccionarLibro }/>
                     <Button shape="circle" icon="edit" size="small" onClick={ this.establecerLibroEnEdicion }/>
-                    <Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onClick={this.seleccionarLibro} onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
+                    <Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onClick={ this.establecerLibroEnEdicion } onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
                         <Button type="danger" shape="circle" size="small" icon="delete"/>
                     </Popconfirm>
                 </div>
@@ -27,6 +26,7 @@ class LibroItem extends Component {
 
     establecerLibroEnEdicion(e) {
         this.props.onEdit(this.props.libro);
+        e.stopPropagation();
     }
 
     seleccionarLibro(e) {
