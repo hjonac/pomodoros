@@ -14,6 +14,7 @@ const tarea_por_defecto = {
 
 const mapStateToProps = (state) => {
     return {
+        libro_seleccionado: state.libro_seleccionado,
         tarea_en_edicion: state.tarea_en_edicion
     }
 };
@@ -28,7 +29,7 @@ const mapStateToFields = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id_libro, id, descripcion, tiempo) => { id === '' ? dispatch(agregar_tarea(id_libro, descripcion, tiempo)) : dispatch(editar_tarea(id_libro, id, descripcion, tiempo)) },
-        onReset: () => { dispatch(establecer_tarea_en_edicion(tarea_por_defecto)) }
+        onReset: (id_libro) => { dispatch(establecer_tarea_en_edicion(tarea_por_defecto)) }
     }
 };
 

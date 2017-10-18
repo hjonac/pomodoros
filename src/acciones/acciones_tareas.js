@@ -21,8 +21,8 @@ export function activar_tarea(id_libro, id) {
     return {type: ACTIVAR_TAREA, id_libro: id_libro, id: id }
 }
 
-export function establecer_tarea_en_edicion(id_libro, id, descripcion, tiempo){
-    return {type: ESTABLECER_TAREA_EN_EDICION, id_libro: id_libro, id: id, descripcion: descripcion, tiempo: tiempo}
+export function establecer_tarea_en_edicion(tarea){
+    return {type: ESTABLECER_TAREA_EN_EDICION, tarea: tarea}
 }
 
 export function resetear_tarea(id_libro, id) {
