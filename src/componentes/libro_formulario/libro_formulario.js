@@ -25,7 +25,7 @@ class LibroForm extends Component {
                     <Col span={24}>
                         <FormItem label="Nombre">
                             {getFieldDecorator('nombre', {
-                                rules: [{ required: true, message: 'Este campo es requerido' }],
+                                rules: [{ required: true, message: 'Requerido' }],
                                 initialValue: this.props.libro_en_edicion.nombre || ''
                             })(
                                 <Input ref={(nombre) => { this.libro_nombre = nombre }}/>
