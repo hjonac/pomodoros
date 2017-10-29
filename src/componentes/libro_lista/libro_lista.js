@@ -34,7 +34,8 @@ LibroList.defaultProps = {
         id: '',
         nombre: ''
     },
-    onClick: () => {},
+    onEdit: () => {},
+    onSelect: () => {},
     onDelete: () => {}
 };
 

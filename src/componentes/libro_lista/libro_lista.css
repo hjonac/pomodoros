@@ -3,7 +3,7 @@ ul.lista-libros {
     border-left: 1px solid #eeeeee;
 }
 
-li {
+ul.lista-libros li {
     position: relative;
     display: block;
     padding: 10px !important;
@@ -11,17 +11,17 @@ li {
     cursor: pointer;
 }
 
-li:hover {
+ul.lista-libros li:hover {
     background-color: aliceblue;
 }
 
-li.activo {
+ul.lista-libros li.activo {
     background-color: #108ee9;
     color: #ffffff;
     font-weight: bold;
 }
 
-.opciones {
+ul.lista-libros .opciones {
     position: absolute;
     right: 0;
     top: 0;
@@ -33,11 +33,11 @@ li.activo {
     background: rgba(250, 250, 250, .03);
 }
 
-li.activo .opciones,
-li:hover .opciones {
+ul.lista-libros li.activo .opciones,
+ul.lista-libros li:hover .opciones {
     display: block;
 }
 
-.opciones button {
+ul.lista-libros .opciones button {
     margin-left: 10px;
 }
