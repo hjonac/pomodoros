@@ -1,0 +1,43 @@
+ul.lista-tareas {
+    list-style: circle !important;
+    border-left: 1px solid #eeeeee;
+}
+
+ul.lista-tareas li {
+    position: relative;
+    display: block;
+    padding: 10px !important;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+ul.lista-tareas li:hover {
+    background-color: aliceblue;
+}
+
+ul.lista-tareas li.activo {
+    background-color: #108ee9;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+ul.lista-tareas .opciones {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 74px;
+    height: 100%;
+    display: none;
+    padding-top: 10px;
+    background: rgba(250, 250, 250, .03);
+}
+
+ul.lista-tareas li.activo .opciones,
+ul.lista-tareas li:hover .opciones {
+    display: block;
+}
+
+ul.lista-tareas .opciones button {
+    margin-left: 10px;
+}

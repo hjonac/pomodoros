@@ -17,8 +17,8 @@ export function eliminar_tarea(id_libro, id) {
     return {type: ELIMINAR_TAREA, id_libro: id_libro, id: id }
 }
 
-export function activar_tarea(id_libro, id) {
-    return {type: ACTIVAR_TAREA, id_libro: id_libro, id: id }
+export function activar_tarea(tarea) {
+    return {type: ACTIVAR_TAREA, tarea: tarea }
 }
 
 export function establecer_tarea_en_edicion(tarea){

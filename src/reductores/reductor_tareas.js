@@ -7,7 +7,6 @@ function tareas(state = {}, action) {
         case AGREGAR_TAREA:
             let store_exists = state[action.id_libro];
 
-            console.log('store', store_exists);
             if(typeof store_exists === 'undefined') {
                 return {
                     ...state,
