@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, Popconfirm } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -15,9 +15,17 @@ class LibroForm extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         let boton_cancelar = null;
+        let boton_eliminar = null;
 
         if (this.props.libro_en_edicion.id !== '')
+        {
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
+            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onClick={ this.establecerLibroEnEdicion } onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
+                                <Button type="danger" shape="circle" size="small" icon="delete"/>
+                            </Popconfirm>);
+        }
+
+
 
         return (
             <Form onSubmit={this.onSubmit} layout="vertical">
@@ -35,7 +43,7 @@ class LibroForm extends Component {
                     <Col span={24}>
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id}/>
-                            <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar }
+                            <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar } &nbsp;
                         </FormItem>
                     </Col>
                 </Row>

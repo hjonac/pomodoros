@@ -1,6 +1,7 @@
 ul.lista-libros {
     list-style: circle !important;
     border-left: 1px solid #eeeeee;
+    background-color: #eeeeee;
 }
 
 ul.lista-libros li {
@@ -9,6 +10,28 @@ ul.lista-libros li {
     padding: 10px !important;
     font-size: 14px;
     cursor: pointer;
+    background-color: #ffffff;
+}
+
+.ghost {
+    position: relative;
+    padding: 10px !important;
+    font-size: 14px;
+    background-color: #ffffff;
+    list-style-type: none;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    box-shadow: 1px 1px 2px #cccccc;
+}
+
+.ghost.activo {
+    background-color: #108ee9;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.ghost .opciones {
+    display: none;
 }
 
 ul.lista-libros li:hover {

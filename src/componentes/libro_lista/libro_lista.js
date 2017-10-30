@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import LibroItem from './libro_item';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import './libro_lista.css';
+
+const SortableItem = SortableElement(({ libro, libro_en_edicion, libro_seleccionado, onEdit, onSelect, onDelete }) =>
+    <LibroItem key={libro.id} libro={libro} en_edicion={libro.id === libro_en_edicion.id} seleccionado={libro.id === libro_seleccionado.id} onEdit={onEdit} onSelect={onSelect} onDelete={onDelete}/>
+);
+
+const SortableList = SortableContainer(({ items, libro_en_edicion, libro_seleccionado, onEdit, onSelect, onDelete }) => {
+    return (
+        <ul className={classNames('lista-libros')}>
+            {items.map((libro, index) => (
+                <SortableItem key={`item-${libro.id}`} index={index} libro={libro} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={onEdit} onSelect={onSelect} onDelete={onDelete} />
+            ))}
+        </ul>
+    );
+});
 
 class LibroList extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.onSortEnd = this.onSortEnd.bind(this);
+    }
+
     render() {
-        const libros = this.props.libros.sort((libro_a, libro_b) => {return libro_a.nombre > libro_b.nombre});
+        const libros = this.props.libros;
         const libro_en_edicion = this.props.libro_en_edicion;
         const libro_seleccionado = this.props.libro_seleccionado;
         let lista = null;
 
-        if(this.props.libros.length > 0)
-        {
-            lista = libros.map(libro =>
-                <LibroItem key={libro.id} libro={libro} en_edicion={libro.id === libro_en_edicion.id} seleccionado={libro.id === libro_seleccionado.id} onEdit={this.props.onEdit} onSelect={this.props.onSelect} onDelete={this.props.onDelete}/>
-            );
-        } else {
-            lista = <li>Crea un libro para empezar</li>
-        }
+        return <SortableList items={libros} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={this.props.onEdit} onSelect={this.props.onSelect} onDelete={this.props.onDelete} onSortEnd={this.onSortEnd} />;
+    }
 
-        return (
-            <ul className={classNames('lista-libros')}>
-                {lista}
-            </ul>
-        );
+    onSortEnd(indices, e) {
+        this.props.onSortEnd(indices);
     }
 }
 
@@ -36,7 +48,8 @@ LibroList.defaultProps = {
     },
     onEdit: () => {},
     onSelect: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    onSortEnd: () => {}
 };
 
 export default LibroList;

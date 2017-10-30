@@ -4,6 +4,7 @@ export const ELIMINAR_LIBRO = "ELIMINAR_LIBRO";
 export const ESTABLECER_LIBRO_EN_EDICION = "ESTABLECER_LIBRO_EN_EDICION";
 export const SELECCIONAR_LIBRO = "SELECCIONAR_LIBRO";
 export const REPETIR_LIBRO = "REPETIR_LIBRO";
+export const SORTEAR_LISTA = "SORTEAR_LISTA";
 
 export function agregar_libro(nombre) {
     return {type: AGREGAR_LIBRO, nombre: nombre}
@@ -14,7 +15,7 @@ export function editar_libro(id, nombre) {
 }
 
 export function eliminar_libro(id) {
-    return {type: ELIMINAR_LIBRO, id: id }
+    return {type: ELIMINAR_LIBRO, id: id}
 }
 
 export function establecer_libro_en_edicion(libro) {
@@ -26,5 +27,9 @@ export function seleccionar_libro(libro) {
 }
 
 export function repetir_libro(id) {
-    return {type: REPETIR_LIBRO, id: id }
+    return {type: REPETIR_LIBRO, id: id}
+}
+
+export function sortear_lista(indices) {
+    return {type: SORTEAR_LISTA, indices: indices}
 }

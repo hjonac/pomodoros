@@ -1,4 +1,5 @@
-import { AGREGAR_LIBRO, EDITAR_LIBRO, ELIMINAR_LIBRO, ESTABLECER_LIBRO_EN_EDICION, SELECCIONAR_LIBRO } from '../acciones/acciones_libros';
+import { AGREGAR_LIBRO, EDITAR_LIBRO, ELIMINAR_LIBRO, ESTABLECER_LIBRO_EN_EDICION, SELECCIONAR_LIBRO, SORTEAR_LISTA } from '../acciones/acciones_libros';
+import { arrayMove } from 'react-sortable-hoc';
 import uuid from 'uuid';
 
 function libros(state = [], action) {
@@ -17,6 +18,8 @@ function libros(state = [], action) {
             return state.filter(libro => {
                 return libro.id !== action.id;
             });
+        case SORTEAR_LISTA:
+            return arrayMove(state, action.indices.oldIndex, action.indices.newIndex);
         default:
             return state;
     }
