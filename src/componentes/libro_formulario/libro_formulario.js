@@ -10,6 +10,7 @@ class LibroForm extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onReset = this.onReset.bind(this);
+        this.eliminarLibro = this.eliminarLibro.bind(this);
     }
 
     render() {
@@ -20,8 +21,8 @@ class LibroForm extends Component {
         if (this.props.libro_en_edicion.id !== '')
         {
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
-            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onClick={ this.establecerLibroEnEdicion } onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
-                                <Button type="danger" shape="circle" size="small" icon="delete"/>
+            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="top" onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
+                                <Button type="danger" size="large" icon="delete">Eliminar</Button>
                             </Popconfirm>);
         }
 
@@ -43,7 +44,7 @@ class LibroForm extends Component {
                     <Col span={24}>
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id}/>
-                            <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar } &nbsp;
+                            <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
                 </Row>
@@ -72,6 +73,10 @@ class LibroForm extends Component {
     onReset(e) {
         this.props.onReset();
     }
+
+    eliminarLibro(e) {
+        this.props.onDelete(this.props.libro_en_edicion.id);
+    }
 }
 
 LibroForm.defaultProps = {
@@ -80,7 +85,8 @@ LibroForm.defaultProps = {
         nombre: ''
     },
     onSubmit: () => {},
-    onReset: () => {}
+    onReset: () => {},
+    onDelete: () => {}
 };
 
 export default LibroForm;

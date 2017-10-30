@@ -2,12 +2,20 @@ import LibroForm from './libro_formulario';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 
-import {agregar_libro, editar_libro, establecer_libro_en_edicion} from '../../acciones/acciones_libros';
+import {agregar_libro, editar_libro, establecer_libro_en_edicion, seleccionar_libro, eliminar_libro} from '../../acciones/acciones_libros';
 
 let libro_por_defecto = {
     id: '',
     nombre: ''
 };
+
+function onDelete(id) {
+    return (dispatch) => {
+        dispatch(eliminar_libro(id))
+        dispatch(establecer_libro_en_edicion(libro_por_defecto));
+        dispatch(seleccionar_libro(libro_por_defecto));
+    };
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -24,7 +32,8 @@ const mapStateToFields = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id, nombre) => { id === '' ? dispatch(agregar_libro(nombre)) : dispatch(editar_libro(id, nombre)) },
-        onReset: () => { dispatch(establecer_libro_en_edicion(libro_por_defecto)) }
+        onReset: () => { dispatch(establecer_libro_en_edicion(libro_por_defecto)) },
+        onDelete: (id) => { dispatch(onDelete(id)) }
     }
 };
 

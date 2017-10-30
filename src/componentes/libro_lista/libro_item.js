@@ -7,7 +7,6 @@ class LibroItem extends Component {
         super(props);
         this.establecerLibroEnEdicion = this.establecerLibroEnEdicion.bind(this);
         this.seleccionarLibro = this.seleccionarLibro.bind(this);
-        this.eliminarLibro = this.eliminarLibro.bind(this);
     }
 
     render() {
@@ -29,10 +28,6 @@ class LibroItem extends Component {
     seleccionarLibro(e) {
         this.props.onSelect(this.props.libro);
     }
-
-    eliminarLibro(e) {
-        this.props.onDelete(this.props.libro.id);
-    }
 }
 
 LibroItem.defaultProps = {
@@ -43,8 +38,7 @@ LibroItem.defaultProps = {
     seleccionado: false,
     en_edicion:false,
     onEdit: () => {},
-    onSelect: () => {},
-    onDelete: () => {}
+    onSelect: () => {}
 }
 
 export default LibroItem;

@@ -23,13 +23,6 @@ function onSelect(libro) {
     }
 }
 
-function onDelete(id) {
-    return (dispatch) => {
-        dispatch(eliminar_libro(id))
-        dispatch(establecer_libro_en_edicion(libro_por_defecto));
-    };
-}
-
 const mapStateToProps = (state) => {
     return {
         libros: state.libros,
@@ -42,7 +35,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onEdit: (libro) => { dispatch(onEdit(libro)) },
         onSelect: (libro) => { dispatch(onSelect(libro)) },
-        onDelete: (id) => { dispatch(onDelete(id)) },
         onSortEnd: (indices) => { dispatch(sortear_lista(indices)) }
     }
 };
