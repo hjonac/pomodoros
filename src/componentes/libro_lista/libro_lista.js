@@ -30,7 +30,6 @@ class LibroList extends Component {
         const libros = this.props.libros;
         const libro_en_edicion = this.props.libro_en_edicion;
         const libro_seleccionado = this.props.libro_seleccionado;
-        let lista = null;
 
         return <SortableList items={libros} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={this.props.onEdit} onSelect={this.props.onSelect} onDelete={this.props.onDelete} onSortEnd={this.onSortEnd} />;
     }

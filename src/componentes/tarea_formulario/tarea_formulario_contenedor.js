@@ -2,7 +2,7 @@ import TareaForm from './tarea_formulario';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 
-import {agregar_tarea, editar_tarea, establecer_tarea_en_edicion} from "../../acciones/acciones_tareas";
+import {agregar_tarea, editar_tarea, establecer_tarea_en_edicion} from "../../redux-acciones/acciones_tareas";
 
 const tarea_por_defecto = {
     id_libro:'',

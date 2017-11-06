@@ -2,7 +2,7 @@ import LibroForm from './libro_formulario';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 
-import {agregar_libro, editar_libro, establecer_libro_en_edicion, seleccionar_libro, eliminar_libro} from '../../acciones/acciones_libros';
+import {agregar_libro, editar_libro, establecer_libro_en_edicion, seleccionar_libro, eliminar_libro} from '../../redux-acciones/acciones_libros';
 
 let libro_por_defecto = {
     id: '',
