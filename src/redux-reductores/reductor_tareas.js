@@ -1,4 +1,4 @@
-import { AGREGAR_TAREA, EDITAR_TAREA, ELIMINAR_TAREA, ACTIVAR_TAREA, ESTABLECER_TAREA_EN_EDICION, RESETEAR_TAREA} from "../acciones/acciones_tareas";
+import { AGREGAR_TAREA, EDITAR_TAREA, ELIMINAR_TAREA, ACTIVAR_TAREA, ESTABLECER_TAREA_EN_EDICION, RESETEAR_TAREA} from "../redux-acciones/acciones_tareas";
 import uuid from 'uuid';
 
 function tareas(state = {}, action) {

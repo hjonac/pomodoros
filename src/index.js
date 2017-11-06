@@ -7,8 +7,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import createHistory  from 'history/createBrowserHistory';
 import storage from 'redux-persist/es/storage';
-import reductor_libros from './reductores/reductor_libros';
-import reductor_tareas from './reductores/reductor_tareas';
+import reductor_libros from './redux-reductores/reductor_libros';
+import reductor_tareas from './redux-reductores/reductor_tareas';
 
 import Pomodoros from './componentes/pomodoros';
 import './index.css';
