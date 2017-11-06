@@ -21,7 +21,7 @@ class LibroForm extends Component {
         if (this.props.libro_en_edicion.id !== '')
         {
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
-            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="top" onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
+            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
                                 <Button type="danger" size="large" icon="delete">Eliminar</Button>
                             </Popconfirm>);
         }

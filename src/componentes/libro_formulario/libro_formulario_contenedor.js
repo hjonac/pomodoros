@@ -17,6 +17,13 @@ function onDelete(id) {
     };
 }
 
+function onReset() {
+    return (dispatch) => {
+        dispatch(seleccionar_libro(libro_por_defecto));
+        dispatch(establecer_libro_en_edicion(libro_por_defecto));
+    };
+}
+
 const mapStateToProps = (state) => {
     return {
         libro_en_edicion: state.libro_en_edicion
@@ -32,7 +39,7 @@ const mapStateToFields = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id, nombre) => { id === '' ? dispatch(agregar_libro(nombre)) : dispatch(editar_libro(id, nombre)) },
-        onReset: () => { dispatch(establecer_libro_en_edicion(libro_por_defecto)) },
+        onReset: () => { dispatch(onReset()) },
         onDelete: (id) => { dispatch(onDelete(id)) }
     }
 };

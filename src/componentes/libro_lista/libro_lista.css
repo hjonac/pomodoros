@@ -1,7 +1,6 @@
 ul.lista-libros {
     list-style: circle !important;
-    border-left: 1px solid #eeeeee;
-    background-color: #eeeeee;
+    background-color: #efefef;
 }
 
 ul.lista-libros li {
@@ -11,6 +10,7 @@ ul.lista-libros li {
     font-size: 14px;
     cursor: pointer;
     background-color: #ffffff;
+    border-left: 1px solid #eeeeee;
 }
 
 .ghost {
@@ -19,9 +19,7 @@ ul.lista-libros li {
     font-size: 14px;
     background-color: #ffffff;
     list-style-type: none;
-    border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
-    box-shadow: 1px 1px 2px #cccccc;
+    border-left: 1px solid #cccccc;
 }
 
 .ghost.activo {
