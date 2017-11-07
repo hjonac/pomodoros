@@ -1,5 +1,6 @@
-import { AGREGAR_TAREA, EDITAR_TAREA, ELIMINAR_TAREA, ACTIVAR_TAREA, ESTABLECER_TAREA_EN_EDICION, RESETEAR_TAREA} from "../redux-acciones/acciones_tareas";
+import { AGREGAR_TAREA, EDITAR_TAREA, ELIMINAR_TAREA, ACTIVAR_TAREA, ESTABLECER_TAREA_EN_EDICION, RESETEAR_TAREA, SORTEAR_TAREAS} from "../redux-acciones/acciones_tareas";
 import uuid from 'uuid';
+import {arrayMove} from "react-sortable-hoc";
 
 function tareas(state = {}, action) {
     switch (action.type)
@@ -45,6 +46,10 @@ function tareas(state = {}, action) {
                 [action.id_libro]: [action.id_libro].map(tarea => {
                     return tarea.id === action.id ? {...tarea, tiempo_transcurrido: 0} : tarea;
                 })
+            };
+        case SORTEAR_TAREAS:
+            return {...state,
+                [action.id_libro]: arrayMove(state[action.id_libro], action.indices.oldIndex, action.indices.newIndex)
             };
         default:
             return state;

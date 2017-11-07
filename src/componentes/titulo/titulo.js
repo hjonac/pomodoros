@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import { Link } from 'react-router-dom';
 import './titulo.css';
 
 class Titulo extends Component {
 
     render() {
-        const back_button = this.props.show_options ? <Link to="/"><Button shape="circle" icon="left" size="small"/></Link> : null;
+        const back_button = this.props.show_options ? <Button onClick={this.props.onBack} shape="circle" icon="left" size="small"/> : null;
         return (
 
             <h4 id="titulo">
@@ -22,7 +21,8 @@ Titulo.defaultProps = {
         id: '',
         nombre: ''
     },
-    show_options: false
+    show_options: false,
+    onBack: () => {}
 };
 
 export default Titulo;

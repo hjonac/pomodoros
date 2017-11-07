@@ -48,7 +48,7 @@ LibroList.defaultProps = {
     onEdit: () => {},
     onSelect: () => {},
     onDelete: () => {},
-    onSortEnd: () => {}
+    onSortEnd: (indices) => {}
 };
 
 export default LibroList;

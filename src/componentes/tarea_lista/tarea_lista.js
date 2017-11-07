@@ -35,7 +35,7 @@ class TareaList extends Component {
     }
 
     onSortEnd(indices, e) {
-
+        this.props.onSortEnd(this.props.libro_seleccionado.id, indices)
     }
 }
 
@@ -62,7 +62,7 @@ TareaList.defaultProps = {
     onEdit: () => {},
     onActive: () => {},
     onDelete: () => {},
-    onSortEnd: () => {}
+    onSortEnd: (id_libro, indices) => {}
 };
 
 export default TareaList;
