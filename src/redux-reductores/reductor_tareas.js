@@ -13,6 +13,7 @@ function tareas(state = {}, action) {
                     ...state,
                     [action.id_libro]: [{
                         id: uuid.v4(),
+                        id_libro: action.id_libro,
                         descripcion: action.descripcion,
                         tiempo: action.tiempo,
                         tiempo_transcurrido: ''
@@ -23,6 +24,7 @@ function tareas(state = {}, action) {
                     ...state,
                     [action.id_libro]: [...state[action.id_libro], {
                         id: uuid.v4(),
+                        id_libro: action.id_libro,
                         descripcion: action.descripcion,
                         tiempo: action.tiempo,
                         tiempo_transcurrido: ''
@@ -31,13 +33,13 @@ function tareas(state = {}, action) {
             }
         case EDITAR_TAREA:
             return {...state,
-                [action.id_libro]: [action.id_libro].map(tarea => {
+                [action.id_libro]: state[action.id_libro].map(tarea => {
                     return tarea.id === action.id ? {...tarea, descripcion: action.descripcion, tiempo: action.tiempo, tiempo_transcurrido: 0} : tarea;
                 })
             };
         case ELIMINAR_TAREA:
             return {...state,
-                [action.id_libro]: [action.id_libro].filter(tarea => {
+                [action.id_libro]: state[action.id_libro].filter(tarea => {
                    return tarea.id === action.id;
                 })
             };
@@ -63,8 +65,8 @@ function tarea_activa(state = {id_libro:'', id:'', descripcion:'', tiempo:'', ti
         case ACTIVAR_TAREA:
             return {
                 ...state,
-                id_libro: action.id_libro,
                 id: action.id,
+                id_libro: action.id_libro,
                 descripcion: action.descripcion,
                 tiempo: action.tiempo,
                 tiempo_transcurrido: action.tiempo_transcurrido
@@ -81,8 +83,8 @@ function tarea_en_edicion(state={id_libro:'', id:'', descripcion:'', tiempo:'', 
         case ESTABLECER_TAREA_EN_EDICION:
             return {
                 ...state,
-                id_libro: action.tarea.id_libro,
                 id: action.tarea.id,
+                id_libro: action.tarea.id_libro,
                 descripcion: action.tarea.descripcion,
                 tiempo: action.tarea.tiempo,
                 tiempo_transcurrido: action.tarea.tiempo_transcurrido
