@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
+import classNames from "classnames";
 
 class TareaItem extends Component {
 
     constructor(props){
         super(props);
+        this.establecerLibroEnEdicion = this.establecerLibroEnEdicion.bind(this);
     }
 
     render() {
+        let tarea = this.props.tarea;
+
         return (
-            <li>
-                {this.props.tarea.descripcion}
+            <li className={ classNames({activo: this.props.en_edicion, en_curso: this.props.activa }) }>
+                {tarea.descripcion}
                 <br/>
-                <small>{this.props.tarea.tiempo}</small>
+                <small>{tarea.tiempo}</small>
+                <div className={ classNames('opciones') }>
+                    <Button shape="circle" icon="edit" size="small" onClick={ this.establecerLibroEnEdicion }/>
+                </div>
             </li>
         )
+    }
+
+    establecerLibroEnEdicion(e) {
+        this.props.onEdit(this.props.tarea);
+        e.stopPropagation();
     }
 }
 

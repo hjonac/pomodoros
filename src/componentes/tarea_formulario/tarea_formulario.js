@@ -27,7 +27,7 @@ class TareaForm extends Component {
                         <FormItem label="Descripción">
                             {getFieldDecorator('descripcion', {
                                 rules: [{ required: true, message: 'Requerido' }],
-                                initialValue: this.props.tarea_en_edicion.nombre || ''
+                                initialValue: this.props.tarea_en_edicion.descripcion || ''
                             })(
                                 <Input ref={(descripcion) => { this.tarea_descripcion = descripcion }}/>
                             )}
