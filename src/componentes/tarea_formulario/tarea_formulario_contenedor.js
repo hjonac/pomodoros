@@ -2,7 +2,7 @@ import TareaForm from './tarea_formulario';
 import { Form } from 'antd';
 import { connect } from 'react-redux';
 
-import {agregar_tarea, editar_tarea, establecer_tarea_en_edicion} from "../../redux-acciones/acciones_tareas";
+import {agregar_tarea, editar_tarea, establecer_tarea_en_edicion, eliminar_tarea} from "../../redux-acciones/acciones_tareas";
 
 const tarea_por_defecto = {
     id_libro:'',
@@ -11,6 +11,13 @@ const tarea_por_defecto = {
     tiempo:'',
     tiempo_transcurrido:''
 };
+
+function onDelete(id_libro, id) {
+    return (dispatch) => {
+        dispatch(eliminar_tarea(id_libro, id))
+        dispatch(establecer_tarea_en_edicion(tarea_por_defecto));
+    };
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -29,7 +36,8 @@ const mapStateToFields = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (id_libro, id, descripcion, tiempo) => { id === '' ? dispatch(agregar_tarea(id_libro, descripcion, tiempo)) : dispatch(editar_tarea(id_libro, id, descripcion, tiempo)) },
-        onReset: (id_libro) => { dispatch(establecer_tarea_en_edicion(tarea_por_defecto)) }
+        onReset: (id_libro) => { dispatch(establecer_tarea_en_edicion(tarea_por_defecto)) },
+        onDelete: (id_libro, id) => { dispatch(onDelete(id_libro, id)) }
     }
 };
 

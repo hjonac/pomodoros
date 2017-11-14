@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, TimePicker, Button, Row, Col } from 'antd';
+import { Form, Input, TimePicker, Button, Row, Col, Popconfirm } from 'antd';
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -10,15 +10,22 @@ class TareaForm extends Component {
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onReset = this.onReset.bind(this);
+        this.eliminarTarea = this.eliminarTarea.bind(this);
     }
 
     render() {
         const { getFieldDecorator } = this.props.form;
         const format = 'HH:mm';
         let boton_cancelar = null;
+        let boton_eliminar = null;
 
         if (this.props.tarea_en_edicion.id !== '')
+        {
             boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
+            boton_eliminar = (<Popconfirm title="¿Realmente desea eliminar esta tarea?" placement="bottom" onConfirm={ this.eliminarTarea } onCancel={()=>{}} okText="Si" cancelText="No">
+                <Button type="danger" size="large" icon="delete">Eliminar</Button>
+            </Popconfirm>);
+        }
 
         return(
             <Form onSubmit={this.onSubmit} layout="vertical">
@@ -47,7 +54,7 @@ class TareaForm extends Component {
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.tarea_id = id }} value={this.props.tarea_en_edicion.id}/>
                             <input type="hidden" name="id_libro" ref={(libro_id) => { this.tarea_libro_id = libro_id }} value={this.props.libro_seleccionado.id}/>
-                            <Button type="primary" htmlType="submit" icon="save">{this.props.tarea_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_cancelar }
+                            <Button type="primary" htmlType="submit" icon="save">{this.props.tarea_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
                 </Row>
@@ -78,6 +85,10 @@ class TareaForm extends Component {
     onReset(e) {
         this.props.onReset();
     }
+
+    eliminarTarea(e) {
+        this.props.onDelete(this.props.tarea_en_edicion.id_libro, this.props.tarea_en_edicion.id);
+    }
 }
 
 TareaForm.defaultProps = {
@@ -93,7 +104,8 @@ TareaForm.defaultProps = {
         nombre:''
     },
     onSubmit: () => {},
-    onReset: () => {}
+    onReset: () => {},
+    onDelete: () => {}
 };
 
 export default TareaForm;

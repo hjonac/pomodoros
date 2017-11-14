@@ -40,7 +40,7 @@ function tareas(state = {}, action) {
         case ELIMINAR_TAREA:
             return {...state,
                 [action.id_libro]: state[action.id_libro].filter(tarea => {
-                   return tarea.id === action.id;
+                   return tarea.id !== action.id;
                 })
             };
         case RESETEAR_TAREA:
