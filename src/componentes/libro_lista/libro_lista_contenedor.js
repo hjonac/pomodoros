@@ -1,7 +1,7 @@
 import LibroList from './libro_lista';
 import { routerActions } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { establecer_libro_en_edicion, eliminar_libro, seleccionar_libro, sortear_lista } from '../../redux-acciones/acciones_libros';
+import { establecer_libro_en_edicion, seleccionar_libro, sortear_lista } from '../../redux-acciones/acciones_libros';
 
 let libro_por_defecto = {
     id: '',

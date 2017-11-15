@@ -21,9 +21,9 @@ class TareaForm extends Component {
 
         if (this.props.tarea_en_edicion.id !== '')
         {
-            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
-            boton_eliminar = (<Popconfirm title="¿Realmente desea eliminar esta tarea?" placement="bottom" onConfirm={ this.eliminarTarea } onCancel={()=>{}} okText="Si" cancelText="No">
-                <Button type="danger" size="large" icon="delete">Eliminar</Button>
+            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}></Button>;
+            boton_eliminar = (<Popconfirm title="¿Realmente desea eliminar esta tarea?" placement="right" onConfirm={ this.eliminarTarea } onCancel={()=>{}} okText="Si" cancelText="No">
+                <Button type="danger" size="large" icon="delete"></Button>
             </Popconfirm>);
         }
 
@@ -54,7 +54,7 @@ class TareaForm extends Component {
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.tarea_id = id }} value={this.props.tarea_en_edicion.id}/>
                             <input type="hidden" name="id_libro" ref={(libro_id) => { this.tarea_libro_id = libro_id }} value={this.props.libro_seleccionado.id}/>
-                            <Button type="primary" htmlType="submit" icon="save">{this.props.tarea_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
+                            <Button type="primary" htmlType="submit" icon="save"></Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
                 </Row>

@@ -20,9 +20,9 @@ class LibroForm extends Component {
 
         if (this.props.libro_en_edicion.id !== '')
         {
-            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}>Cancelar</Button>;
-            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="bottom" onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
-                                <Button type="danger" size="large" icon="delete">Eliminar</Button>
+            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}></Button>;
+            boton_eliminar = (<Popconfirm title="¿Relamente desea eliminar este libro?" placement="right" onConfirm={ this.eliminarLibro } onCancel={()=>{}} okText="Si" cancelText="No">
+                                <Button type="danger" size="large" icon="delete"></Button>
                             </Popconfirm>);
         }
 
@@ -44,7 +44,7 @@ class LibroForm extends Component {
                     <Col span={24}>
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id}/>
-                            <Button type="primary" htmlType="submit" icon="save">{this.props.libro_en_edicion.id === '' ? 'Crear' : 'Editar'}</Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
+                            <Button type="primary" htmlType="submit" icon="save"></Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
                 </Row>
