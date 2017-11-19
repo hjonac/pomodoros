@@ -9,6 +9,7 @@ import createHistory  from 'history/createBrowserHistory';
 import storage from 'redux-persist/es/storage';
 import reductor_libros from './redux-reductores/reductor_libros';
 import reductor_tareas from './redux-reductores/reductor_tareas';
+import reductor_estado from './redux-reductores/reductor_estado';
 
 import Pomodoros from './componentes/pomodoros';
 import './index.css';
@@ -24,6 +25,7 @@ const middleware = applyMiddleware(routerMiddleware(history), thunk);
 const reducer = persistReducer(config, combineReducers({
     ...reductor_libros,
     ...reductor_tareas,
+    ...reductor_estado,
     router: routerReducer
 }));
 
