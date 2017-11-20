@@ -1,4 +1,5 @@
 import { CAMBIAR_ESTADO_TAREAS } from "../redux-acciones/acciones_estado";
+import { PAUSADO } from "../constantes/estados";
 
 function estado(state = 'pausado', action) {
     switch (action.type)
@@ -6,7 +7,7 @@ function estado(state = 'pausado', action) {
         case CAMBIAR_ESTADO_TAREAS:
             return action.estado;
         default:
-                return 'pausado';
+                return PAUSADO;
     }
 }
 

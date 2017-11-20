@@ -11,19 +11,19 @@ class TareaForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onReset = this.onReset.bind(this);
         this.eliminarTarea = this.eliminarTarea.bind(this);
+        this.format = 'HH:mm:ss';
     }
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const format = 'HH:mm';
         let boton_cancelar = null;
         let boton_eliminar = null;
 
         if (this.props.tarea_en_edicion.id !== '')
         {
-            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset}></Button>;
+            boton_cancelar = <Button type="danger" htmlType="button" icon="close" onClick={this.onReset} />;
             boton_eliminar = (<Popconfirm title="¿Realmente desea eliminar esta tarea?" placement="right" onConfirm={ this.eliminarTarea } onCancel={()=>{}} okText="Si" cancelText="No">
-                <Button type="danger" size="large" icon="delete"></Button>
+                <Button type="danger" size="large" icon="delete" />
             </Popconfirm>);
         }
 
@@ -44,9 +44,9 @@ class TareaForm extends Component {
                         <FormItem label="Duración">
                             {getFieldDecorator('tiempo', {
                                 rules: [{ required: true, message: 'Requerido' }],
-                                initialValue: this.props.tarea_en_edicion.tiempo ? moment(this.props.tarea_en_edicion.tiempo, format) : moment('00:00', format)
+                                initialValue: this.props.tarea_en_edicion.tiempo ? moment(this.props.tarea_en_edicion.tiempo, this.format) : moment('00:00:00', this.format)
                             })(
-                                <TimePicker ref={(tiempo) => {this.tarea_tiempo = tiempo}} defaultOpenValue={moment('00:00', format)} format={format} placeholder="Duración"/>
+                                <TimePicker ref={(tiempo) => {this.tarea_tiempo = tiempo}} defaultOpenValue={moment('00:00:00', this.format)} format={this.format} placeholder="Duración"/>
                             )}
                         </FormItem>
                     </Col>
@@ -54,7 +54,7 @@ class TareaForm extends Component {
                         <FormItem>
                             <input type="hidden" name="id" ref={(id) => { this.tarea_id = id }} value={this.props.tarea_en_edicion.id}/>
                             <input type="hidden" name="id_libro" ref={(libro_id) => { this.tarea_libro_id = libro_id }} value={this.props.libro_seleccionado.id}/>
-                            <Button type="primary" htmlType="submit" icon="save"></Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
+                            <Button type="primary" htmlType="submit" icon="save" /> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
                 </Row>
@@ -69,7 +69,7 @@ class TareaForm extends Component {
             id_libro: this.tarea_libro_id.value,
             id: this.tarea_id.value,
             descripcion: this.tarea_descripcion.props.value,
-            tiempo: this.tarea_tiempo.props.value ? this.tarea_tiempo.props.value.format('HH:mm') : '00:00'
+            tiempo: this.tarea_tiempo.props.value ? this.tarea_tiempo.props.value.format(this.format) : '00:00:00'
         };
 
         this.props.form.validateFields((err, values) => {
