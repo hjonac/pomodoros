@@ -16,7 +16,7 @@ function tareas(state = {}, action) {
                         id_libro: action.id_libro,
                         descripcion: action.descripcion,
                         tiempo: action.tiempo,
-                        tiempo_transcurrido: ''
+                        tiempo_transcurrido: '00:00:00'
                     }]
                 };
             } else {
@@ -27,14 +27,14 @@ function tareas(state = {}, action) {
                         id_libro: action.id_libro,
                         descripcion: action.descripcion,
                         tiempo: action.tiempo,
-                        tiempo_transcurrido: ''
+                        tiempo_transcurrido: '00:00:00'
                     }]
                 }
             }
         case EDITAR_TAREA:
             return {...state,
                 [action.id_libro]: state[action.id_libro].map(tarea => {
-                    return tarea.id === action.id ? {...tarea, descripcion: action.descripcion, tiempo: action.tiempo, tiempo_transcurrido: 0} : tarea;
+                    return tarea.id === action.id ? {...tarea, descripcion: action.descripcion, tiempo: action.tiempo, tiempo_transcurrido: '00:00:00'} : tarea;
                 })
             };
         case ELIMINAR_TAREA:
@@ -63,6 +63,8 @@ function tarea_activa(state = {id_libro:'', id:'', descripcion:'', tiempo:'', ti
     switch (action.type)
     {
         case ACTIVAR_TAREA:
+            console.log('reductor', action);
+
             return {
                 ...state,
                 id: action.id,

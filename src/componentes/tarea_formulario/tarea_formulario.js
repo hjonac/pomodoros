@@ -69,13 +69,14 @@ class TareaForm extends Component {
             id_libro: this.tarea_libro_id.value,
             id: this.tarea_id.value,
             descripcion: this.tarea_descripcion.props.value,
-            tiempo: this.tarea_tiempo.props.value ? this.tarea_tiempo.props.value.format(this.format) : '00:00:00'
+            tiempo: this.tarea_tiempo.props.value ? this.tarea_tiempo.props.value.format(this.format) : '00:00:00',
+            tiempo_transcurrido: '00:00:00'
         };
 
         this.props.form.validateFields((err, values) => {
             if (!err)
             {
-                this.props.onSubmit(tarea.id_libro, tarea.id, tarea.descripcion, tarea.tiempo);
+                this.props.onSubmit(tarea.id_libro, tarea.id, tarea.descripcion, tarea.tiempo, tarea.tiempo_transcurrido);
 
                 this.onReset(e);
             }

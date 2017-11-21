@@ -18,7 +18,7 @@ export function eliminar_tarea(id_libro, id) {
     return {type: ELIMINAR_TAREA, id_libro: id_libro, id: id }
 }
 
-export function activar_tarea(tarea) {
+export function establecer_tarea_activa(tarea) {
     return {type: ACTIVAR_TAREA, tarea: tarea }
 }
 

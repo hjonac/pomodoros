@@ -23,7 +23,7 @@ class TareaControls extends Component {
                 icon = 'play-circle-o';
                 break;
             case ACTIVO:
-                icon = 'stop-circle-o';
+                icon = 'pause-circle-o';
                 break;
             default:
                 icon = 'play-circle-o';
@@ -50,20 +50,22 @@ class TareaControls extends Component {
     }
 
     activar(e) {
-        this.props.onStateChange(ACTIVO);
+        this.props.onChangeState(ACTIVO);
     }
 
     pausar(e) {
-        this.props.onStateChange(PAUSADO);
+        this.props.onChangeState(PAUSADO);
     }
 
     resetear(e) {
-        this.props.onStateChange(RESETEADO);
+        this.props.onChangeState(RESETEADO);
     }
 }
 
 TareaControls.defaultProps = {
-
+    estado: PAUSADO,
+    tareas: [],
+    onChangeState: () => {},
 };
 
 export default TareaControls;

@@ -35,7 +35,7 @@ const mapStateToFields = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSubmit: (id_libro, id, descripcion, tiempo) => { id === '' ? dispatch(agregar_tarea(id_libro, descripcion, tiempo)) : dispatch(editar_tarea(id_libro, id, descripcion, tiempo)) },
+        onSubmit: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => { id === '' ? dispatch(agregar_tarea(id_libro, descripcion, tiempo, tiempo_transcurrido)) : dispatch(editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido)) },
         onReset: (id_libro) => { dispatch(establecer_tarea_en_edicion(tarea_por_defecto)) },
         onDelete: (id_libro, id) => { dispatch(onDelete(id_libro, id)) }
     }
