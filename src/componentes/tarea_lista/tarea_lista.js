@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import TareaItem from './tarea_item';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { PAUSADO, ACTIVO, RESETEADO } from "../../constantes/estados";
+import {PAUSADO, ACTIVO, RESETEADO, FINALIZADO} from "../../constantes/estados";
 import moment from 'moment';
 import classNames from "classnames";
 import './tarea_lista.css';
 
-const SortableItem = SortableElement(({ tarea, tarea_activa, tarea_en_edicion, onEdit, onActive, onDelete }) =>
-    <TareaItem key={tarea.id} tarea={tarea} activa={tarea.id === tarea_activa.id} en_edicion={tarea.id === tarea_en_edicion.id} onEdit={onEdit} onActive={onActive} onDelete={onDelete}/>
+const SortableItem = SortableElement(({ tarea, tarea_activa, tarea_en_edicion, onEdit, onActive }) =>
+    <TareaItem key={tarea.id} tarea={tarea} activa={tarea.id === tarea_activa.id} en_edicion={tarea.id === tarea_en_edicion.id} onEdit={onEdit} onActive={onActive} />
 );
 
 const SortableList = SortableContainer(({ items, tarea_activa, tarea_en_edicion, onEdit, onActive, onDelete }) => {
     return (
         <ul className={classNames('lista-tareas')}>
             {items.map((tarea, index) => (
-                <SortableItem key={`item-${tarea.id}`} index={index} tarea={tarea} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} onEdit={onEdit} onActive={onActive} onDelete={onDelete} />
+                <SortableItem key={`item-${tarea.id}`} index={index} tarea={tarea} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} onEdit={onEdit} onActive={onActive} />
             ))}
         </ul>
     );
@@ -42,59 +42,48 @@ class TareaList extends Component {
     }
 
     componentDidMount() {
-        console.log("el componente fue montado");
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log("recibiendo nuevas props");
         const tareas = nextProps.tareas[nextProps.libro_seleccionado.id] || [];
-        const tarea_activa = nextProps.tarea_activa;
-        console.log(nextProps);
+        const id_activa = nextProps.tarea_activa;
 
+        //se cambio la activa a id
         if(tareas.length > 0) {
+            let index = 0;
+
             if (nextProps.estado === ACTIVO) {
-                for(let i = 0; i < tareas.length; i++)
-                {
-                    let tarea = tareas[i];
-                    let activa = tarea.id === tarea_activa.id;
-                    console.log('activa', tarea, tarea_activa);
-                    if (activa)
-                    {
-                        console.log('activada', tarea);
+                if (id_activa === '') {
+                    this.props.establecerActiva(tareas[index].id);
+                    return true;
+                } else {
+                    let tarea_activa = tareas[index];
+                    console.log(tarea_activa);
+                    if (tarea_activa.tiempo_transcurrido === tarea_activa.tiempo) {
+                        console.log('cumplida');
+                        index = tareas.findIndex(tarea => tarea.id === tarea_activa.id);
+
+                        if(index + 1 === tareas.length) {
+                            this.props.cambiarEstado(FINALIZADO);
+                            return true;
+                        } else {
+                            this.props.establecerActiva(tareas[index + 1].id);
+                            return true;
+                        }
                     } else {
-                        this.props.onActive(tarea);
-                        console.log('activando', tarea);
-                        break;
+                        console.log('en curso');
+                        let tiempo_actual = moment(tarea_activa.tiempo_transcurrido, this.format);
+
+                        setTimeout(() => {
+                            //console.log('modificando tarea');
+                            //console.log();
+                            this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.add(1, 'second').format(this.format));
+                        }, 1000)
+                        return true;
                     }
                 }
             }
         }
-        /*
-        if(tareas.length > 0)
-        {
-            if (nextProps.estado === ACTIVO)
-            {
-                tareas.map((tarea, index) => {
-                    let activa = tarea.id === tarea_activa.id;
-                    if (activa)
-                    {
-                        console.log('tarea en curso', tarea);
-                        if (tarea.tiempo_transcurrido !== tarea.tiempo)
-                        {
-                            let tiempo_actual = moment(tarea.tiempo_transcurrido, this.format);
-                            setInterval(() => {
-                                this.props.onSubmit(tarea.id_libro, tarea.id, tarea.tiempo, tiempo_actual.add(1, 'second').format(this.format));
-                            }, 1000);
-
-                        }
-                    } else {
-                        console.log('estableciendo activa', tarea);
-                        this.props.onActive(tarea);
-                    }
-                });
-            }
-        }
-        */
     }
 }
 
@@ -118,10 +107,11 @@ TareaList.defaultProps = {
         tiempo: '',
         tiempo_transcurrido: ''
     },
-    onEdit: () => {},
-    onActive: () => {},
-    onDelete: () => {},
-    onSortEnd: (id_libro, indices) => {}
+    onSortEnd: (id_libro, indices) => {},
+    onEdit: (tarea) => {},
+    establecerActiva: (id) => {},
+    cambiarEstado: (estado) => {},
+    modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => {}
 };
 
 export default TareaList;

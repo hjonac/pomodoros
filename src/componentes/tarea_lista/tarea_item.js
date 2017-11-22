@@ -16,7 +16,7 @@ class TareaItem extends Component {
             <li className={ classNames({activo: this.props.en_edicion, en_curso: this.props.activa }) }>
                 {tarea.descripcion}
                 <br/>
-                <small>{tarea.tiempo}</small>
+                <small>{tarea.tiempo} - {tarea.tiempo_transcurrido}</small>
                 <div className={ classNames('opciones') }>
                     <Button shape="circle" icon="edit" size="small" onClick={ this.establecerLibroEnEdicion }/>
                 </div>
@@ -41,8 +41,7 @@ TareaItem.defaultProps = {
     activa: false,
     en_edicion: false,
     onEdit: () => {},
-    onActive: () => {},
-    onDelete: () => {}
+    onActive: () => {}
 };
 
 export default TareaItem;

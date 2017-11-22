@@ -10,16 +10,16 @@ export function agregar_tarea(id_libro, descripcion, tiempo) {
     return {type: AGREGAR_TAREA, id_libro: id_libro, descripcion: descripcion, tiempo: tiempo}
 }
 
-export function editar_tarea(id_libro, id, descripcion, tiempo) {
-    return {type: EDITAR_TAREA, id_libro: id_libro, id: id, descripcion: descripcion, tiempo: tiempo}
+export function editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido) {
+    return {type: EDITAR_TAREA, id_libro: id_libro, id: id, descripcion: descripcion, tiempo: tiempo, tiempo_transcurrido: tiempo_transcurrido}
 }
 
 export function eliminar_tarea(id_libro, id) {
     return {type: ELIMINAR_TAREA, id_libro: id_libro, id: id }
 }
 
-export function establecer_tarea_activa(tarea) {
-    return {type: ACTIVAR_TAREA, tarea: tarea }
+export function establecer_tarea_activa(id) {
+    return {type: ACTIVAR_TAREA, id: id }
 }
 
 export function establecer_tarea_en_edicion(tarea){

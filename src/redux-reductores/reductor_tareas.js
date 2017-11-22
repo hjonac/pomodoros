@@ -34,7 +34,7 @@ function tareas(state = {}, action) {
         case EDITAR_TAREA:
             return {...state,
                 [action.id_libro]: state[action.id_libro].map(tarea => {
-                    return tarea.id === action.id ? {...tarea, descripcion: action.descripcion, tiempo: action.tiempo, tiempo_transcurrido: '00:00:00'} : tarea;
+                    return tarea.id === action.id ? {...tarea, descripcion: action.descripcion, tiempo: action.tiempo, tiempo_transcurrido: action.tiempo_transcurrido} : tarea;
                 })
             };
         case ELIMINAR_TAREA:
@@ -58,21 +58,12 @@ function tareas(state = {}, action) {
     }
 }
 
-function tarea_activa(state = {id_libro:'', id:'', descripcion:'', tiempo:'', tiempo_transcurrido:'' }, action)
+function tarea_activa(state = '', action)
 {
     switch (action.type)
     {
         case ACTIVAR_TAREA:
-            console.log('reductor', action);
-
-            return {
-                ...state,
-                id: action.id,
-                id_libro: action.id_libro,
-                descripcion: action.descripcion,
-                tiempo: action.tiempo,
-                tiempo_transcurrido: action.tiempo_transcurrido
-            };
+            return action.id;
         default:
             return state
     }

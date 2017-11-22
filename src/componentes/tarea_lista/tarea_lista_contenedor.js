@@ -1,9 +1,7 @@
 import TareaList from './tarea_lista';
 import { connect } from 'react-redux';
-import {
-    sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa,
-    agregar_tarea, editar_tarea
-} from "../../redux-acciones/acciones_tareas";
+import { sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea } from "../../redux-acciones/acciones_tareas";
+import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
 
 const mapStateToProps = (state) => {
     return {
@@ -19,8 +17,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onSortEnd: (id_libro, indices) => { dispatch(sortear_tareas(id_libro, indices)) },
         onEdit: (tarea) => { dispatch(establecer_tarea_en_edicion(tarea)) },
-        onActive: (tarea) => { dispatch(establecer_tarea_activa(tarea)) },
-        onSubmit: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => { dispatch(editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido)) },
+        establecerActiva: (id) => { dispatch(establecer_tarea_activa(id)) },
+        cambiarEstado: (estado) => { dispatch(cambiar_estado_tareas(estado)) },
+        modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => { dispatch(editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido)) },
     }
 };
 
