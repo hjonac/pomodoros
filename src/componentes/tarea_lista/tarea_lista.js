@@ -47,41 +47,60 @@ class TareaList extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         const tareas = nextProps.tareas[nextProps.libro_seleccionado.id] || [];
         const id_activa = nextProps.tarea_activa;
+        let index = 0;
 
-        //se cambio la activa a id
         if(tareas.length > 0) {
-            let index = 0;
 
             if (nextProps.estado === ACTIVO) {
                 if (id_activa === '') {
                     this.props.establecerActiva(tareas[index].id);
-                    return true;
                 } else {
+                    index = tareas.findIndex(tarea => tarea.id === id_activa);
                     let tarea_activa = tareas[index];
-                    console.log(tarea_activa);
-                    if (tarea_activa.tiempo_transcurrido === tarea_activa.tiempo) {
-                        console.log('cumplida');
-                        index = tareas.findIndex(tarea => tarea.id === tarea_activa.id);
 
-                        if(index + 1 === tareas.length) {
+                    if (tarea_activa.tiempo_transcurrido === tarea_activa.tiempo) {
+                        index++;
+
+                        if(index === tareas.length) {
                             this.props.cambiarEstado(FINALIZADO);
-                            return true;
                         } else {
-                            this.props.establecerActiva(tareas[index + 1].id);
-                            return true;
+                            this.props.establecerActiva(tareas[index].id);
                         }
                     } else {
-                        console.log('en curso');
                         let tiempo_actual = moment(tarea_activa.tiempo_transcurrido, this.format);
 
                         setTimeout(() => {
-                            //console.log('modificando tarea');
-                            //console.log();
                             this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.add(1, 'second').format(this.format));
-                        }, 1000)
-                        return true;
+                        }, 1000);
                     }
                 }
+            }
+
+            if (nextProps.estado === RESETEADO) {
+                console.log(id_activa);
+                if (id_activa === '') {
+                    this.props.establecerActiva(tareas[index].id);
+                } else {
+                    index = tareas.findIndex(tarea => tarea.id === id_activa);
+                    let tarea_activa = tareas[index];
+
+                    if (tarea_activa.tiempo_transcurrido === '00:00:00') {
+                        index++;
+
+                        if(index === tareas.length) {
+                            this.props.cambiarEstado(FINALIZADO);
+                        } else {
+                            this.props.establecerActiva(tareas[index].id);
+                        }
+                    } else {
+                        let tiempo_actual = moment('00:00:00', this.format);
+                        this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.format(this.format));
+                    }
+                }
+            }
+
+            if (nextProps.estado === PAUSADO) {
+                this.props.establecerActiva('');
             }
         }
     }
