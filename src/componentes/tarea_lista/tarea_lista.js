@@ -6,15 +6,15 @@ import moment from 'moment';
 import classNames from "classnames";
 import './tarea_lista.css';
 
-const SortableItem = SortableElement(({ tarea, tarea_activa, tarea_en_edicion, onEdit, onActive }) =>
-    <TareaItem key={tarea.id} tarea={tarea} activa={tarea.id === tarea_activa.id} en_edicion={tarea.id === tarea_en_edicion.id} onEdit={onEdit} onActive={onActive} />
+const SortableItem = SortableElement(({ tarea, tarea_activa, tarea_en_edicion, estado, onEdit, onActive }) =>
+    <TareaItem key={tarea.id} tarea={tarea} activa={tarea.id === tarea_activa} en_edicion={tarea.id === tarea_en_edicion.id} estado={estado} onEdit={onEdit} onActive={onActive} />
 );
 
-const SortableList = SortableContainer(({ items, tarea_activa, tarea_en_edicion, onEdit, onActive, onDelete }) => {
+const SortableList = SortableContainer(({ items, tarea_activa, tarea_en_edicion, estado, onEdit, onActive }) => {
     return (
         <ul className={classNames('lista-tareas')}>
             {items.map((tarea, index) => (
-                <SortableItem key={`item-${tarea.id}`} index={index} tarea={tarea} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} onEdit={onEdit} onActive={onActive} />
+                <SortableItem key={`item-${tarea.id}`} index={index} tarea={tarea} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} estado={estado} onEdit={onEdit} onActive={onActive} />
             ))}
         </ul>
     );
@@ -34,7 +34,7 @@ class TareaList extends Component {
         const tarea_activa = this.props.tarea_activa;
         const tarea_en_edicion = this.props.tarea_en_edicion;
 
-        return <SortableList items={tareas} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} onEdit={this.props.onEdit} onActive={this.props.onActive} onDelete={this.props.onDelete} onSortEnd={this.onSortEnd} />;
+        return <SortableList items={tareas} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} tarea_activa={tarea_activa} tarea_en_edicion={tarea_en_edicion} estado={this.props.estado} onEdit={this.props.onEdit} onActive={this.props.onActive} onSortEnd={this.onSortEnd} />;
     }
 
     onSortEnd(indices, e) {
@@ -77,7 +77,6 @@ class TareaList extends Component {
             }
 
             if (nextProps.estado === RESETEADO) {
-                console.log(id_activa);
                 if (id_activa === '') {
                     this.props.establecerActiva(tareas[index].id);
                 } else {
@@ -100,7 +99,7 @@ class TareaList extends Component {
             }
 
             if (nextProps.estado === PAUSADO) {
-                this.props.establecerActiva('');
+
             }
         }
     }

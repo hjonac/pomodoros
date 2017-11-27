@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Row, Col } from 'antd';
-import { PAUSADO, ACTIVO, RESETEADO } from "../../constantes/estados";
+import {PAUSADO, ACTIVO, RESETEADO, FINALIZADO} from "../../constantes/estados";
 
 class TareaControls extends Component {
 
@@ -30,12 +30,22 @@ class TareaControls extends Component {
         }
 
         let controls = null;
+        let boton_resetear = null;
+        let boton_control = null;
 
         if(tareas.length > 0)
         {
+            if (estado === PAUSADO || estado === FINALIZADO) {
+                boton_resetear = <Button type="default" htmlType="button" icon="reload" onClick={ this.resetear }/>;
+            }
+
+            if (estado === ACTIVO || estado === PAUSADO) {
+
+            }
+
             controls = (
                 <Col span={24}>
-                    <Button type="primary" htmlType="button" icon={icon} onClick={ estado === ACTIVO ? this.pausar : this.activar }/>&nbsp;<Button type="default" htmlType="button" icon="reload" onClick={ this.resetear }/>
+                    <Button type="primary" htmlType="button" icon={icon} onClick={ estado === ACTIVO ? this.pausar : this.activar }/>&nbsp;{ boton_resetear }
                 </Col>
             );
         } else {

@@ -38,7 +38,21 @@ ul.lista-tareas li.activo {
 }
 
 ul.lista-tareas li.en_curso {
-    border-left: 1px solid #00ff00;
+    background-color: rgba(76, 175, 80, .03);
+}
+
+ul.lista-tareas li .progress {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background-color: #00C853;
+    z-index: 2;
+}
+
+ul.lista-tareas li .progress.animate {
+    transition: height 0.25s ease-in;
 }
 
 ul.lista-tareas .opciones {

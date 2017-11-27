@@ -2,7 +2,7 @@ import TareaList from './tarea_lista';
 import { connect } from 'react-redux';
 import { sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea } from "../../redux-acciones/acciones_tareas";
 import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
-import {FINALIZADO} from "../../constantes/estados";
+import {FINALIZADO, RESETEADO} from "../../constantes/estados";
 
 function onChangeState(estado){
     return (dispatch) => {
