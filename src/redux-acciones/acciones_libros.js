@@ -26,8 +26,8 @@ export function seleccionar_libro(libro) {
     return {type: SELECCIONAR_LIBRO, libro: libro}
 }
 
-export function repetir_libro(id) {
-    return {type: REPETIR_LIBRO, id: id}
+export function repetir_libro(id, repetir) {
+    return {type: REPETIR_LIBRO, id: id, repetir: true}
 }
 
 export function sortear_lista(indices) {

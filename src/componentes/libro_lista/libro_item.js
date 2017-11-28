@@ -12,7 +12,7 @@ class LibroItem extends Component {
     render() {
         const libro = this.props.libro;
         return (
-            <li onClick={ this.seleccionarLibro } className={ classNames({activo: this.props.seleccionado}) }>{ libro.nombre }
+            <li onClick={ this.seleccionarLibro } className={ classNames({activo: this.props.en_edicion}) }>{ libro.nombre }
                 <div className={ classNames('opciones') }>
                     <Button shape="circle" icon="edit" size="small" onClick={ this.establecerLibroEnEdicion }/>
                 </div>
