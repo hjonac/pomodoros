@@ -1,4 +1,5 @@
 export const PAUSADO = 'PAUSADO';
 export const ACTIVO = 'ACTIVO';
 export const RESETEADO = 'RESETEADO';
-export const FINALIZADO = 'FINALIZADO';
+export const RESETEADO_FINALIZADO = 'RESETEADO_FINALIZADO';
+export const ACTIVO_FINALIZADO = 'ACTIVO_FINALIZADO';

@@ -45,8 +45,8 @@ function tareas(state = {}, action) {
             };
         case RESETEAR_TAREA:
             return {...state,
-                [action.id_libro]: [action.id_libro].map(tarea => {
-                    return tarea.id === action.id ? {...tarea, tiempo_transcurrido: 0} : tarea;
+                [action.id_libro]: state[action.id_libro].map(tarea => {
+                    return tarea.id === action.id ? {...tarea, tiempo_transcurrido: '00:00:00'} : tarea;
                 })
             };
         case SORTEAR_TAREAS:

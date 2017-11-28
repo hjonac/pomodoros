@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import classNames from "classnames";
 import moment from 'moment';
-import {ACTIVO, FINALIZADO, PAUSADO, RESETEADO} from "../../constantes/estados";
+import {ACTIVO, ACTIVO_FINALIZADO, PAUSADO, RESETEADO_FINALIZADO} from "../../constantes/estados";
 
 class TareaItem extends Component {
 
@@ -17,7 +17,7 @@ class TareaItem extends Component {
         let actual = moment(tarea.tiempo, this.format);
         let transcurrida = moment(tarea.tiempo_transcurrido, this.format);
         let porcentaje = (+transcurrida.seconds() * 100) / +actual.seconds();
-        let animate = this.props.estado !== FINALIZADO && this.props.estado !== RESETEADO;
+        let animate = this.props.estado !== ACTIVO_FINALIZADO && this.props.estado !== RESETEADO_FINALIZADO;
         let styles = {
             height: porcentaje+'%'
         };

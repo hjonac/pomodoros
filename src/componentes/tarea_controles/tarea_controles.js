@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Row, Col } from 'antd';
-import {PAUSADO, ACTIVO, RESETEADO, FINALIZADO} from "../../constantes/estados";
+import { PAUSADO, ACTIVO, RESETEADO, ACTIVO_FINALIZADO, RESETEADO_FINALIZADO } from "../../constantes/estados";
 
 class TareaControls extends Component {
 
@@ -15,39 +15,47 @@ class TareaControls extends Component {
         const estado = this.props.estado;
         const tareas = this.props.tareas[this.props.libro_seleccionado.id] || []
 
-        let icon = '';
+        let play_estado_habilitado = false;
+        let play_estado_deshabiltiado = false;
+        let reset_estado_deshabilitado = false;
+
         switch (estado)
         {
             case PAUSADO:
+                play_estado_habilitado = true;
+                reset_estado_deshabilitado = false;
+                break;
             case RESETEADO:
-                icon = 'play-circle-o';
+                play_estado_habilitado = true;
+                reset_estado_deshabilitado = true;
                 break;
             case ACTIVO:
-                icon = 'pause-circle-o';
+                play_estado_habilitado = false;
+                reset_estado_deshabilitado = false;
+                break;
+            case ACTIVO_FINALIZADO:
+                play_estado_habilitado = false;
+                play_estado_deshabiltiado = true;
+                reset_estado_deshabilitado = false;
+                break;
+            case RESETEADO_FINALIZADO:
+                play_estado_habilitado = true;
+                reset_estado_deshabilitado = true;
                 break;
             default:
-                icon = 'play-circle-o';
         }
 
         let controls = null;
-        let boton_resetear = null;
-        let boton_control = null;
 
         if(tareas.length > 0)
         {
-            if (estado === PAUSADO || estado === FINALIZADO) {
-                boton_resetear = <Button type="default" htmlType="button" icon="reload" onClick={ this.resetear }/>;
-            }
-
-            if (estado === ACTIVO || estado === PAUSADO) {
-
-            }
-
             controls = (
                 <Col span={24}>
-                    <Button type="primary" htmlType="button" icon={icon} onClick={ estado === ACTIVO ? this.pausar : this.activar }/>&nbsp;{ boton_resetear }
+                    <Button type={play_estado_habilitado ? 'primary' : 'danger'} htmlType="button" icon={ play_estado_habilitado ? 'play-circle-o' : 'pause-circle-o'} onClick={ play_estado_habilitado ? this.activar : this.pausar } disabled={play_estado_deshabiltiado}/> &nbsp;
+                    <Button type="default" htmlType="button" icon={'retweet'} onClick={ this.resetear } disabled={ reset_estado_deshabilitado } /> &nbsp;
                 </Col>
             );
+            /*&nbsp;<Button type="default" htmlType="button" icon="reload" onClick={ this.resetear }/>*/
         } else {
             controls = '';
         }
@@ -75,7 +83,7 @@ class TareaControls extends Component {
 TareaControls.defaultProps = {
     estado: PAUSADO,
     tareas: [],
-    onChangeState: () => {},
+    onChangeState: (estado) => {},
 };
 
 export default TareaControls;

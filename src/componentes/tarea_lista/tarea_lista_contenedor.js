@@ -1,15 +1,15 @@
 import TareaList from './tarea_lista';
 import { connect } from 'react-redux';
-import { sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea } from "../../redux-acciones/acciones_tareas";
+import { sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea, resetear_tarea } from "../../redux-acciones/acciones_tareas";
 import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
-import {FINALIZADO, RESETEADO} from "../../constantes/estados";
+import {ACTIVO_FINALIZADO, RESETEADO_FINALIZADO} from "../../constantes/estados";
 
 function onChangeState(estado){
     return (dispatch) => {
-        if (estado === FINALIZADO) {
+        if (estado === ACTIVO_FINALIZADO || estado === RESETEADO_FINALIZADO)
+        {
             dispatch(establecer_tarea_activa(''));
         }
-
         dispatch(cambiar_estado_tareas(estado));
     };
 }
@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         onEdit: (tarea) => { dispatch(establecer_tarea_en_edicion(tarea)) },
         establecerActiva: (id) => { dispatch(establecer_tarea_activa(id)) },
         cambiarEstado: (estado) => { dispatch(onChangeState(estado)) },
+        resetearTarea: (id_libro, id) => { dispatch(resetear_tarea(id_libro, id)) },
         modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => { dispatch(editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido)) },
     }
 };

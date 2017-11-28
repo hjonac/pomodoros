@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TareaItem from './tarea_item';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import {PAUSADO, ACTIVO, RESETEADO, FINALIZADO} from "../../constantes/estados";
+import {PAUSADO, ACTIVO, RESETEADO, ACTIVO_FINALIZADO, RESETEADO_FINALIZADO} from "../../constantes/estados";
 import moment from 'moment';
 import classNames from "classnames";
 import './tarea_lista.css';
@@ -27,6 +27,7 @@ class TareaList extends Component {
 
         this.onSortEnd = this.onSortEnd.bind(this);
         this.format = 'HH:mm:ss';
+        this.timer = null;
     }
 
     render() {
@@ -42,6 +43,7 @@ class TareaList extends Component {
     }
 
     componentDidMount() {
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -62,14 +64,14 @@ class TareaList extends Component {
                         index++;
 
                         if(index === tareas.length) {
-                            this.props.cambiarEstado(FINALIZADO);
+                            this.props.cambiarEstado(ACTIVO_FINALIZADO);
                         } else {
                             this.props.establecerActiva(tareas[index].id);
                         }
                     } else {
                         let tiempo_actual = moment(tarea_activa.tiempo_transcurrido, this.format);
 
-                        setTimeout(() => {
+                        this.timer = setTimeout(() => {
                             this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.add(1, 'second').format(this.format));
                         }, 1000);
                     }
@@ -87,19 +89,26 @@ class TareaList extends Component {
                         index++;
 
                         if(index === tareas.length) {
-                            this.props.cambiarEstado(FINALIZADO);
+                            this.props.cambiarEstado(RESETEADO_FINALIZADO);
                         } else {
                             this.props.establecerActiva(tareas[index].id);
                         }
                     } else {
-                        let tiempo_actual = moment('00:00:00', this.format);
-                        this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.format(this.format));
+                        this.props.resetearTarea(tarea_activa.id_libro, tarea_activa.id);
                     }
                 }
             }
 
             if (nextProps.estado === PAUSADO) {
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                }
+            }
 
+            if (nextProps.estado === RESETEADO) {
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                }
             }
         }
     }
@@ -129,6 +138,7 @@ TareaList.defaultProps = {
     onEdit: (tarea) => {},
     establecerActiva: (id) => {},
     cambiarEstado: (estado) => {},
+    resetearTarea: (id_libro, id) => {},
     modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => {}
 };
 
