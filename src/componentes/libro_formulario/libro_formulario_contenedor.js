@@ -6,7 +6,8 @@ import {agregar_libro, editar_libro, establecer_libro_en_edicion, seleccionar_li
 
 let libro_por_defecto = {
     id: '',
-    nombre: ''
+    nombre: '',
+    repetir: false
 };
 
 function onDelete(id) {
@@ -32,13 +33,15 @@ const mapStateToProps = (state) => {
 
 const mapStateToFields = (state) => {
     return {
-        nombre: state.libro_en_edicion
+        id: state.libro_en_edicion,
+        nombre: state.libro_en_edicion,
+        repetir: state.repetir
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSubmit: (id, nombre) => { id === '' ? dispatch(agregar_libro(nombre)) : dispatch(editar_libro(id, nombre)) },
+        onSubmit: (id, nombre, repetir) => { id === '' ? dispatch(agregar_libro(nombre, repetir)) : dispatch(editar_libro(id, nombre, repetir)) },
         onReset: () => { dispatch(onReset()) },
         onDelete: (id) => { dispatch(onDelete(id)) }
     }

@@ -4,15 +4,15 @@ import LibroItem from './libro_item';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import './libro_lista.css';
 
-const SortableItem = SortableElement(({ libro, libro_en_edicion, libro_seleccionado, onEdit, onSelect, onDelete }) =>
-    <LibroItem key={libro.id} libro={libro} en_edicion={libro.id === libro_en_edicion.id} seleccionado={libro.id === libro_seleccionado.id} onEdit={onEdit} onSelect={onSelect} onDelete={onDelete}/>
+const SortableItem = SortableElement(({ libro, libro_en_edicion, libro_seleccionado, onEdit, onSelect }) =>
+    <LibroItem key={libro.id} libro={libro} en_edicion={libro.id === libro_en_edicion.id} seleccionado={libro.id === libro_seleccionado.id} onEdit={onEdit} onSelect={onSelect} />
 );
 
-const SortableList = SortableContainer(({ items, libro_en_edicion, libro_seleccionado, onEdit, onSelect, onDelete }) => {
+const SortableList = SortableContainer(({ items, libro_en_edicion, libro_seleccionado, onEdit, onSelect }) => {
     return (
         <ul className={classNames('lista-libros')}>
             {items.map((libro, index) => (
-                <SortableItem key={`item-${libro.id}`} index={index} libro={libro} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={onEdit} onSelect={onSelect} onDelete={onDelete} />
+                <SortableItem key={`item-${libro.id}`} index={index} libro={libro} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={onEdit} onSelect={onSelect} />
             ))}
         </ul>
     );
@@ -31,7 +31,7 @@ class LibroList extends Component {
         const libro_en_edicion = this.props.libro_en_edicion;
         const libro_seleccionado = this.props.libro_seleccionado;
 
-        return <SortableList items={libros} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={this.props.onEdit} onSelect={this.props.onSelect} onDelete={this.props.onDelete} onSortEnd={this.onSortEnd} />;
+        return <SortableList items={libros} pressDelay={300} lockAxis={"y"} helperClass={"ghost"} libro_en_edicion={libro_en_edicion} libro_seleccionado={libro_seleccionado} onEdit={this.props.onEdit} onSelect={this.props.onSelect} onSortEnd={this.onSortEnd} />;
     }
 
     onSortEnd(indices, e) {
@@ -45,9 +45,8 @@ LibroList.defaultProps = {
         id: '',
         nombre: ''
     },
-    onEdit: () => {},
-    onSelect: () => {},
-    onDelete: () => {},
+    onEdit: (libro) => {},
+    onSelect: (libro) => {},
     onSortEnd: (indices) => {}
 };
 

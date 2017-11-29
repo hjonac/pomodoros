@@ -5,7 +5,8 @@ import { establecer_libro_en_edicion, seleccionar_libro, sortear_lista } from '.
 
 let libro_por_defecto = {
     id: '',
-    nombre: ''
+    nombre: '',
+    repetir: false
 };
 
 function onEdit(libro) {
@@ -18,7 +19,7 @@ function onEdit(libro) {
 function onSelect(libro) {
     return (dispatch) => {
         dispatch(seleccionar_libro(libro));
-        dispatch(establecer_libro_en_edicion(libro_por_defecto));
+        //dispatch(establecer_libro_en_edicion(libro_por_defecto));
         dispatch(routerActions.push('/tareas'));
     }
 }

@@ -43,7 +43,8 @@ class LibroForm extends Component {
                     </Col>
                     <Col span={24}>
                         <FormItem>
-                            <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id}/>
+                            <input type="hidden" name="id" ref={(id) => { this.libro_id = id }} value={this.props.libro_en_edicion.id }/>
+                            <input type="hidden" name="repetir" ref={(repetir) => { this.libro_repetir = repetir }} value={this.props.libro_en_edicion.repetir }/>
                             <Button type="primary" htmlType="submit" icon="save"></Button> &nbsp; { boton_eliminar } &nbsp; { boton_cancelar }
                         </FormItem>
                     </Col>
@@ -58,12 +59,13 @@ class LibroForm extends Component {
         let titulo = {
             id: this.libro_id.value,
             nombre: this.libro_nombre.props.value,
+            repetir: this.libro_repetir.value,
         };
 
         this.props.form.validateFields((err, values) => {
             if (!err)
             {
-                this.props.onSubmit(titulo.id, titulo.nombre);
+                this.props.onSubmit(titulo.id, titulo.nombre, titulo.repetir);
 
                 this.onReset(e);
             }

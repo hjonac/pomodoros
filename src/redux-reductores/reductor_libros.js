@@ -30,21 +30,21 @@ function libros(state = [], action) {
     }
 }
 
-function libro_en_edicion (state = {id: '', nombre: ''}, action) {
+function libro_en_edicion (state = {id: '', nombre: '', repetir: false}, action) {
     switch (action.type)
     {
         case ESTABLECER_LIBRO_EN_EDICION:
-            return { ...state, id: action.libro.id, nombre: action.libro.nombre};
+            return { ...state, id: action.libro.id, nombre: action.libro.nombre, repetir: action.libro.repetir};
         default:
             return state;
     }
 }
 
-function libro_seleccionado (state = {id: '', nombre: ''}, action) {
+function libro_seleccionado (state = {id: '', nombre: '', repetir: false}, action) {
     switch (action.type)
     {
         case SELECCIONAR_LIBRO:
-            return { ...state, id: action.libro.id, nombre: action.libro.nombre};
+            return { ...state, id: action.libro.id, nombre: action.libro.nombre, repetir: action.libro.repetir};
         default:
             return state;
     }
