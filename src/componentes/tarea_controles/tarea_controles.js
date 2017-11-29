@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Checkbox, Row, Col } from 'antd';
 import { PAUSADO, ACTIVO, RESETEADO, ACTIVO_FINALIZADO, RESETEADO_FINALIZADO } from "../../constantes/estados";
 
 class TareaControls extends Component {
@@ -9,11 +9,12 @@ class TareaControls extends Component {
         this.activar = this.activar.bind(this);
         this.pausar = this.pausar.bind(this);
         this.resetear = this.resetear.bind(this);
+        this.repetir = this.repetir.bind(this);
     }
 
     render() {
         const estado = this.props.estado;
-        const tareas = this.props.tareas[this.props.libro_seleccionado.id] || []
+        const tareas = this.props.tareas[this.props.libro_seleccionado.id] || [];
 
         let play_estado_habilitado = false;
         let play_estado_deshabiltiado = false;
@@ -46,22 +47,30 @@ class TareaControls extends Component {
         }
 
         let controls = null;
+        let repetir = null;
 
         if(tareas.length > 0)
         {
             controls = (
                 <Col span={24}>
-                    <Button type={play_estado_habilitado ? 'primary' : 'danger'} htmlType="button" icon={ play_estado_habilitado ? 'play-circle-o' : 'pause-circle-o'} onClick={ play_estado_habilitado ? this.activar : this.pausar } disabled={play_estado_deshabiltiado}/> &nbsp;
-                    <Button type="default" htmlType="button" icon={'retweet'} onClick={ this.resetear } disabled={ reset_estado_deshabilitado } /> &nbsp;
+                    <Button type={ play_estado_habilitado ? 'primary' : 'danger' } htmlType="button" icon={ play_estado_habilitado ? 'play-circle-o' : 'pause-circle-o'} onClick={ play_estado_habilitado ? this.activar : this.pausar } disabled={ play_estado_deshabiltiado }/> &nbsp;
+                    <Button type="default" htmlType="button" icon={ 'retweet' } onClick={ this.resetear } disabled={ reset_estado_deshabilitado } /> &nbsp;
                 </Col>
             );
-            /*&nbsp;<Button type="default" htmlType="button" icon="reload" onClick={ this.resetear }/>*/
+
+            repetir = (
+                <Col span={24}>
+                    <Checkbox onChange={ this.repetir } defaultChecked={ this.props.libro_seleccionado.repetir }>Repetir la lista al finalizar.</Checkbox>
+                </Col>
+            );
         } else {
             controls = '';
         }
 
         return (
             <Row gutter={16} type="flex">
+                { repetir }
+                <Col span={24}><br/></Col>
                 { controls }
             </Row>
         )
@@ -77,6 +86,10 @@ class TareaControls extends Component {
 
     resetear(e) {
         this.props.onChangeState(RESETEADO);
+    }
+
+    repetir(e) {
+        this.props.onChangeRepeat(this.props.libro_seleccionado, e.target.checked);
     }
 }
 

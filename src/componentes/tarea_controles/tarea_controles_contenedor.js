@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
 import { PAUSADO, RESETEADO } from "../../constantes/estados";
 import { establecer_tarea_activa } from "../../redux-acciones/acciones_tareas";
+import { repetir_libro, seleccionar_libro } from "../../redux-acciones/acciones_libros";
 
 const mapStateToProps = (state) => {
     return {
@@ -24,9 +25,18 @@ function onChangeState(estado){
     };
 }
 
+function onChangeRepeat(libro, repetir) {
+    return (dispatch) => {
+        dispatch(repetir_libro(libro.id, repetir));
+        dispatch(seleccionar_libro({id: libro.id, nombre: libro.nombre, repetir: repetir}));
+    }
+
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
-        onChangeState: (estado) => { dispatch(onChangeState(estado)) }
+        onChangeState: (estado) => { dispatch(onChangeState(estado)) },
+        onChangeRepeat: (libro, repetir) => { dispatch(onChangeRepeat(libro, repetir)) }
     }
 };
 
