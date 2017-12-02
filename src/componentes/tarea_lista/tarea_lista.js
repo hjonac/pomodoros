@@ -64,7 +64,7 @@ class TareaList extends Component {
                         index++;
 
                         if(index === tareas.length) {
-                            this.props.cambiarEstado(ACTIVO_FINALIZADO);
+                            this.props.cambiarEstado(ACTIVO_FINALIZADO, nextProps.libro_seleccionado);
                         } else {
                             this.props.establecerActiva(tareas[index].id);
                         }
@@ -89,7 +89,7 @@ class TareaList extends Component {
                         index++;
 
                         if(index === tareas.length) {
-                            this.props.cambiarEstado(RESETEADO_FINALIZADO);
+                            this.props.cambiarEstado(RESETEADO_FINALIZADO, nextProps.libro_seleccionado);
                         } else {
                             this.props.establecerActiva(tareas[index].id);
                         }
@@ -137,7 +137,7 @@ TareaList.defaultProps = {
     onSortEnd: (id_libro, indices) => {},
     onEdit: (tarea) => {},
     establecerActiva: (id) => {},
-    cambiarEstado: (estado) => {},
+    cambiarEstado: (estado, libro) => {},
     resetearTarea: (id_libro, id) => {},
     modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => {}
 };

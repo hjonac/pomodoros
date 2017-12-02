@@ -47,8 +47,16 @@ ul.lista-tareas li .progress {
     top: 0;
     width: 2px;
     height: 0;
-    background-color: #00C853;
     z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+ul.lista-tareas li .progress.activo {
+    background-color: #00C853;
+}
+
+ul.lista-tareas li .progress.pausado {
+    background-color: #D50000;
 }
 
 ul.lista-tareas li .progress.animate {

@@ -1,16 +1,31 @@
 import TareaList from './tarea_lista';
 import { connect } from 'react-redux';
-import { sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea, resetear_tarea } from "../../redux-acciones/acciones_tareas";
+import {
+    sortear_tareas, establecer_tarea_en_edicion, establecer_tarea_activa, editar_tarea, resetear_tarea,
+    resetear_todas_las_tareas
+} from "../../redux-acciones/acciones_tareas";
 import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
-import { ACTIVO_FINALIZADO, RESETEADO_FINALIZADO } from "../../constantes/estados";
+import {ACTIVO, ACTIVO_FINALIZADO, RESETEADO_FINALIZADO} from "../../constantes/estados";
 
-function onChangeState(estado){
+function onChangeState(estado, libro){
     return (dispatch) => {
-        if (estado === ACTIVO_FINALIZADO || estado === RESETEADO_FINALIZADO)
-        {
+        if (estado === ACTIVO_FINALIZADO) {
             dispatch(establecer_tarea_activa(''));
+
+            if (libro.repetir) {
+                dispatch(resetear_todas_las_tareas(libro.id));
+                dispatch(cambiar_estado_tareas(ACTIVO_FINALIZADO));
+                setTimeout(() => dispatch(cambiar_estado_tareas(ACTIVO)), 100)
+            } else {
+                dispatch(cambiar_estado_tareas(estado));
+            }
+
+        } else if (estado === RESETEADO_FINALIZADO) {
+            dispatch(establecer_tarea_activa(''));
+            dispatch(cambiar_estado_tareas(estado));
+        } else {
+            dispatch(cambiar_estado_tareas(estado));
         }
-        dispatch(cambiar_estado_tareas(estado));
     };
 }
 
@@ -29,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
         onSortEnd: (id_libro, indices) => { dispatch(sortear_tareas(id_libro, indices)) },
         onEdit: (tarea) => { dispatch(establecer_tarea_en_edicion(tarea)) },
         establecerActiva: (id) => { dispatch(establecer_tarea_activa(id)) },
-        cambiarEstado: (estado) => { dispatch(onChangeState(estado)) },
+        cambiarEstado: (estado, libro) => { dispatch(onChangeState(estado, libro)) },
         resetearTarea: (id_libro, id) => { dispatch(resetear_tarea(id_libro, id)) },
         modificarTarea: (id_libro, id, descripcion, tiempo, tiempo_transcurrido) => { dispatch(editar_tarea(id_libro, id, descripcion, tiempo, tiempo_transcurrido)) },
     }

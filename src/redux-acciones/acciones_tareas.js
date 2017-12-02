@@ -5,6 +5,7 @@ export const ACTIVAR_TAREA = "ACTIVAR_TAREA";
 export const ESTABLECER_TAREA_EN_EDICION = "ESTABLECER_TAREA_EN_EDICION";
 export const RESETEAR_TAREA = "RESETEAR_TAREA";
 export const SORTEAR_TAREAS = "SORTEAR_TAREAS";
+export const RESETEAR_TODAS_LAS_TAREAS = "RESETEAR_TODAS_LAS_TAREA";
 
 export function agregar_tarea(id_libro, descripcion, tiempo) {
     return {type: AGREGAR_TAREA, id_libro: id_libro, descripcion: descripcion, tiempo: tiempo}
@@ -32,4 +33,8 @@ export function resetear_tarea(id_libro, id) {
 
 export function sortear_tareas(id_libro, indices) {
     return {type: SORTEAR_TAREAS, id_libro: id_libro, indices: indices}
+}
+
+export function resetear_todas_las_tareas(id_libro) {
+    return {type: RESETEAR_TODAS_LAS_TAREAS, id_libro: id_libro}
 }

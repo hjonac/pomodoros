@@ -15,9 +15,14 @@ class TareaItem extends Component {
     render() {
         let tarea = this.props.tarea;
         let actual = moment(tarea.tiempo, this.format);
+        let total_actual = (actual.hours() * 3600) + (actual.minutes() * 60) + actual.seconds();
         let transcurrida = moment(tarea.tiempo_transcurrido, this.format);
-        let porcentaje = (+transcurrida.seconds() * 100) / +actual.seconds();
+        let total_transcurrida = (transcurrida.hours() * 3600) + (transcurrida.minutes() * 60) + transcurrida.seconds();
+        let porcentaje = (+total_transcurrida * 100) / +total_actual;
+
         let animate = this.props.estado !== ACTIVO_FINALIZADO && this.props.estado !== RESETEADO_FINALIZADO;
+        let pausado = this.props.estado === PAUSADO;
+        let activo = this.props.estado === ACTIVO || this.props.estado === ACTIVO_FINALIZADO;
         let styles = {
             height: porcentaje+'%'
         };
@@ -25,7 +30,7 @@ class TareaItem extends Component {
         return (
             <li className={ classNames({activo: this.props.en_edicion, en_curso: this.props.activa }) }>
                 {tarea.descripcion}
-                <div className={ classNames({progress: true, animate: animate}) }  style={styles}>&nbsp;</div>
+                <div className={ classNames({progress: true, animate: animate, activo: activo, pausado: pausado}) }  style={styles}>&nbsp;</div>
                 <br/>
                 <small>{tarea.tiempo}</small>
                 <div className={ classNames('opciones') }>
