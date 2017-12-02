@@ -10,19 +10,17 @@ import {ACTIVO, ACTIVO_FINALIZADO, RESETEADO_FINALIZADO} from "../../constantes/
 function onChangeState(estado, libro){
     return (dispatch) => {
         if (estado === ACTIVO_FINALIZADO) {
-            dispatch(establecer_tarea_activa(''));
-
             if (libro.repetir) {
                 dispatch(resetear_todas_las_tareas(libro.id));
                 dispatch(cambiar_estado_tareas(ACTIVO_FINALIZADO));
-                setTimeout(() => dispatch(cambiar_estado_tareas(ACTIVO)), 100)
+                setTimeout(() => dispatch(cambiar_estado_tareas(ACTIVO)), 1)
             } else {
                 dispatch(cambiar_estado_tareas(estado));
             }
-
-        } else if (estado === RESETEADO_FINALIZADO) {
             dispatch(establecer_tarea_activa(''));
+        } else if (estado === RESETEADO_FINALIZADO) {
             dispatch(cambiar_estado_tareas(estado));
+            dispatch(establecer_tarea_activa(''));
         } else {
             dispatch(cambiar_estado_tareas(estado));
         }

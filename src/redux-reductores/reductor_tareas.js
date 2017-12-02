@@ -72,6 +72,7 @@ function tarea_activa(state = '', action)
     switch (action.type)
     {
         case ACTIVAR_TAREA:
+            console.log("Activa: "+action.id);
             return action.id;
         default:
             return state

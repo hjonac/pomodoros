@@ -43,39 +43,39 @@ class TareaList extends Component {
     }
 
     componentDidMount() {
-
+        this.props.establecerActiva('');
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         const tareas = nextProps.tareas[nextProps.libro_seleccionado.id] || [];
         const id_activa = nextProps.tarea_activa;
-        let index = 0;
+        let diferentes = this.props.tarea_activa !== nextProps.tarea_activa;
 
+        let index = 0;
         if(tareas.length > 0) {
 
             if (nextProps.estado === ACTIVO) {
-                if (id_activa === '') {
-                    this.props.establecerActiva(tareas[index].id);
-                } else {
-                    index = tareas.findIndex(tarea => tarea.id === id_activa);
-                    let tarea_activa = tareas[index];
-
-                    if (tarea_activa.tiempo_transcurrido === tarea_activa.tiempo) {
-                        index++;
-
-                        if(index === tareas.length) {
-                            this.props.cambiarEstado(ACTIVO_FINALIZADO, nextProps.libro_seleccionado);
-                        } else {
-                            this.props.establecerActiva(tareas[index].id);
-                        }
+                this.temporizador(diferentes ? 1 : 1000).then(() => {
+                    if (id_activa === '') {
+                        this.props.establecerActiva(tareas[index].id);
                     } else {
-                        let tiempo_actual = moment(tarea_activa.tiempo_transcurrido, this.format);
+                        index = tareas.findIndex(tarea => tarea.id === id_activa);
+                        let tarea_activa = tareas[index];
 
-                        this.timer = setTimeout(() => {
+                        if (tarea_activa.tiempo_transcurrido === tarea_activa.tiempo) {
+                            index++;
+                            if(index === tareas.length) {
+                                this.props.cambiarEstado(ACTIVO_FINALIZADO, nextProps.libro_seleccionado);
+                            } else {
+                                this.props.establecerActiva(tareas[index].id);
+                            }
+                        } else {
+                            let tiempo_actual = moment(tarea_activa.tiempo_transcurrido, this.format);
+
                             this.props.modificarTarea(tarea_activa.id_libro, tarea_activa.id, tarea_activa.descripcion, tarea_activa.tiempo, tiempo_actual.add(1, 'second').format(this.format));
-                        }, 1000);
+                        }
                     }
-                }
+                });
             }
 
             if (nextProps.estado === RESETEADO) {
@@ -111,6 +111,16 @@ class TareaList extends Component {
                 }
             }
         }
+    }
+
+    temporizador(milis) {
+        let temporizador = new Promise((resolve, reject) => {
+           this.timer = setTimeout(() => {
+               resolve();
+           }, milis);
+        });
+
+        return temporizador;
     }
 }
 
