@@ -3,12 +3,6 @@ import { routerActions } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { establecer_libro_en_edicion, seleccionar_libro, sortear_lista } from '../../redux-acciones/acciones_libros';
 
-let libro_por_defecto = {
-    id: '',
-    nombre: '',
-    repetir: false
-};
-
 function onEdit(libro) {
     return (dispatch) => {
         dispatch(seleccionar_libro(libro));
@@ -19,7 +13,6 @@ function onEdit(libro) {
 function onSelect(libro) {
     return (dispatch) => {
         dispatch(seleccionar_libro(libro));
-        //dispatch(establecer_libro_en_edicion(libro_por_defecto));
         dispatch(routerActions.push('/tareas'));
     }
 }

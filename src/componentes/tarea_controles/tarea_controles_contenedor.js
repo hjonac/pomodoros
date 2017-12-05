@@ -2,7 +2,7 @@ import TareaControls from './tarea_controles';
 import { connect } from 'react-redux';
 
 import { cambiar_estado_tareas } from "../../redux-acciones/acciones_estado";
-import { PAUSADO, RESETEADO } from "../../constantes/estados";
+import { RESETEADO } from "../../constantes/estados";
 import { establecer_tarea_activa } from "../../redux-acciones/acciones_tareas";
 import { repetir_libro, seleccionar_libro } from "../../redux-acciones/acciones_libros";
 
